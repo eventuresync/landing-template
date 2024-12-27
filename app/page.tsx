@@ -34,6 +34,7 @@ import VideoVSL from '@/components/sections/VideoVSL';
 import VideoTestimonial from '@/components/sections/videoTestimonial';
 import Reality from '@/components/sections/Reality';
 import Autocuidarse from '@/components/sections/Autocuidarse';
+import Testimonials2 from '@/components/sections/StudentResults';
 
 export default function Home() {
   return (
@@ -49,7 +50,7 @@ export default function Home() {
       <ProgramIncludes />
       <AboutPilar />
       <Pricing />
-      <StudentResults />
+      <Testimonials2 />
       <FAQ />
       <CallToAction />
       {/* <SocialProof /> */}
