@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Cash Content | Marketing con María',
-  description: 'Aprende a monetizar tu contenido digital con estrategias probadas',
+  title: 'Pilar Benitez | Programa Autocuidarte',
+  description: 'Autocuidarte, Sin dietas ultra-rígidas',
 };
 
 export default function RootLayout({
