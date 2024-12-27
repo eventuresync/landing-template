@@ -36,7 +36,6 @@ export default function VideoVSL() {
               <div className="relative aspect-video">
                 <iframe
                   src={`https://www.youtube.com/embed/${testimonial.videoId}`}
-                  title={testimonial.name}
                   className="w-full h-full"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
