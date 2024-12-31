@@ -18,7 +18,7 @@ export default function Autocuidarse() {
         </div>
         <div className="flex flex-col justify-center items-center ">
           <div className="flex items-start space-x-4">
-            <img src="/autocuidarse.png" />
+            <img src="/autocuidarse.png" className=" md:max-w-xl" />
           </div>
         </div>
         <p className="text-l py-4 text-center text-gray-600  max-w-2xl mx-auto">

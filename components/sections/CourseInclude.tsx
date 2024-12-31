@@ -46,7 +46,7 @@ export default function CourseIncludes() {
         </p>
 
         <div className="flex justify-center items-center max-w-4xl mx-auto">
-          <Card className="p-8">
+          <Card className="p-8 px-[30px] lg:px-[130px]">
             <div className="flex flex-col items-center gap-3 mb-6">
               <UserCheck className="w-12 h-12 text-[#FF3366]" />
               <h3 className="text-3xl lg:text-5xl text-center font-bold">
