@@ -11,7 +11,7 @@ export default function Header() {
             className="w-48"
           />
         </div>
-        <p className="mt-2 text-md text-center px-4">
+        <p className="mt-2 text-[#444] text-md text-center px-4">
           Ex-perfeccionista recuperada y autora de 5 libros 
           <br />
           sobre salud femenina, te revela:
