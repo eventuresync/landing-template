@@ -11,8 +11,8 @@
   --color-rating: #FFD700;
 
   /* Typography */
-  --font-titles: 'sans-serif-condensed', sans-serif;
-  --font-body: 'sans-serif-modern', sans-serif;
+  --font-titles: 'Montserrat', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
   
   /* Font sizes */
   --text-h1: clamp(48px, 5vw, 56px);

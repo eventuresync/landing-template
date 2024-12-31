@@ -49,7 +49,7 @@ export default function CourseIncludes() {
           <Card className="p-8">
             <div className="flex flex-col items-center gap-3 mb-6">
               <UserCheck className="w-12 h-12 text-[#FF3366]" />
-              <h3 className="text-4xl text-center font-bold">
+              <h3 className="text-3xl lg:text-5xl text-center font-bold">
                 ¿Qué incluye el curso?
               </h3>
             </div>
@@ -63,7 +63,7 @@ export default function CourseIncludes() {
                     }}
                     className="mt-1 text-[#FF3366]"
                   />
-                  <div dangerouslySetInnerHTML={{ __html: item || '' }}></div>
+                  <div className='text-lg text-[#4A4A4A]' dangerouslySetInnerHTML={{ __html: item || '' }}></div>
                 </li>
               ))}
             </ul>

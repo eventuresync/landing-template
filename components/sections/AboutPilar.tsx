@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function AboutPilar() {
   return (
-    <section className="py-20 relative max-w-[960px] mx-auto">
+    <section className="pt-20 pb-10 relative max-w-[960px] mx-auto">
       <div className="mx-auto px-4">
         <div className="flex flex-col gap-12 items-center max-w-6xl mx-auto">         
 
