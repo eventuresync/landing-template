@@ -2,12 +2,12 @@
 
 export default function Autocuidarse() {
   return (
-    <section className="pb-16 pt-8 bg-white">
+    <section className="pb-16 pt-8 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="">
           <h2 className="text-xl md:text-2xl font-black text-center mb-2">
-            Pues tengo buenas noticias: esa metodología que estabas buscando ya
-            existe.
+            Pues tengo buenas noticias: esa metodología <br/>
+            que estabas buscando ya existe.
           </h2>
           <p className="text-l py-4 text-center text-gray-600  max-w-2xl mx-auto">
             Y hoy quiero darte la bienvenida a…
@@ -22,16 +22,7 @@ export default function Autocuidarse() {
           </div>
         </div>
         <p className="text-l py-4 text-center text-gray-600  max-w-2xl mx-auto">
-          He volcado mis más de{' '}
-          <span className="font-bold">
-            25 años de experiencia trabajando con mujeres,
-          </span>
-          junto con mi conocimiento en nutrición energética, cambio de hábitos y
-          cocina terapéutica, en una{' '}
-          <span className="font-bold">metodología amable, muy eficiente</span> y
-          pensada para esta etapa de la vida. Una forma cercana y práctica de
-          ayudarte a recuperar tu energía, sentirte bien en tu piel y vivir tus
-          50+ con equilibrio. 💛
+        He volcado mis 25 años trabajando con mujeres, junto con mi conocimiento en nutrición energética y cambio de hábitos, en una <span className="font-bold">metodología</span> amable y eficiente, pensada para esta etapa de la vida. Para ayudarte a recuperar tu energía, sentirte bien en tu piel y vivir tus 50+ con equilibrio. 💛
         </p>
       </div>
     </section>

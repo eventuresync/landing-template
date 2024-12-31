@@ -2,21 +2,21 @@
 
 export default function Header() {
   return (
-    <header className="flex flex-col items-center pt-8 pb-4">
-      <div className="relative">
-        <img
-          src="/pilar_profile.png"
-          alt="Pilar Benitez - Perfil Instagram"
-          className="w-48"
-        />
-      </div>
-      <h2 className="mt-4 text-xl font-semibold">
-        Sólo para mujeres ambiciosas de 50+ años:
-      </h2>
-      <p className="mt-2 text-md px-4">
-        Ex-perfeccionista recuperada y autora de 5 libros sobre salud femenina,
-        te revela:
-      </p>
-    </header>
+    <div className="max-w-[960px] mx-auto">
+      <header className="flex flex-col items-center pt-6 pb-2">
+        <div className="relative mb-4">
+          <img
+            src="/pilar_profile.png"
+            alt="Pilar Benitez - Perfil Instagram"
+            className="w-48"
+          />
+        </div>
+        <p className="mt-2 text-md text-center px-4">
+          Ex-perfeccionista recuperada y autora de 5 libros 
+          <br />
+          sobre salud femenina, te revela:
+        </p>
+      </header>
+    </div>
   );
 }

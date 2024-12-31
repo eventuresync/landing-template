@@ -11,8 +11,8 @@ export default function CallToAction() {
           ¿Lista para tomar el control de tu cuerpo?
         </h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto">
-          Estás a una decisión de empezar a vivir como{' '}
-          <span className="font-bold">mujer radiante.</span>
+          Estás a una decisión de empezar a vivir <br/>
+           como{' '}<span className="font-bold">mujer radiante.</span>
         </p>
         <Button
           size="lg"

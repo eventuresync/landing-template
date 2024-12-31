@@ -5,6 +5,7 @@ import { Check, UserCheck, XCircle } from 'lucide-react';
 import { Button } from '../ui/button';
 
 const programIncludesList = [
+  '<span style="font-weight: 600;" >El curso completo.</span> Acceso a todo el curso de alimentación Deshincharse 50+ y sus bonos.',
   '<span style="font-weight: 600;" >Sesión inicial 1:1 con Pilar,</span> donde haré una radiografía profunda de tus hábitos, tu situación actual y tus objetivos, para diseñar juntas un plan de acción personalizado para ti. ',
   '<span style="font-weight: 600;" >Mentorías grupales cada semana conmigo</span> vía zoom durante 24 semanas (6 meses), en donde tendremos sesiones de mentalidad y progreso para resolver dudas y no desviarnos del proceso.',
   '<span style="font-weight: 600;" >Módulo de meditación</span> para calmar la mente y lograr una mente serena a prueba de estrés y para alcanzar equilibrio emocional.',
@@ -15,7 +16,7 @@ const programIncludesList = [
 
 export default function ProgramIncludes() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="pt-10 pb-20 bg-gray-50 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="text-center">Opción 2: </div>
         <h2 className="text-3xl md:text-4xl font-black text-center mb-4">
@@ -25,18 +26,6 @@ export default function ProgramIncludes() {
           ¿Prefieres un acompañamiento más personalizado?
           <br />
           Entonces, esta mentoría es para ti.
-        </p>
-        <p className="text-l text-center text-gray-800 mb-12 max-w-2xl mx-auto">
-          Incluye todo el curso Deshincharse 50+, así como:
-          <br />
-          <span className="font-bold">1)</span> Acceso directo a tu mentora
-          (¡yo!),
-          <br />
-          <span className="font-bold">2)</span> Módulo de meditación para calmar
-          la mente y,
-          <br />
-          <span className="font-bold">3)</span> Módulo de ejercicios pautados
-          para mujeres 50+
         </p>
         <div className="flex justify-center items-center max-w-4xl mx-auto">
           <Card className="p-8">

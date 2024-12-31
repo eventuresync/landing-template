@@ -17,7 +17,7 @@ const courseIncludesList = [
 
 export default function Reality() {
   return (
-    <section className="pt-20 pb-4 bg-gray-50">
+    <section className="pt-20 pb-4 bg-gray-50 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="flex justify-center items-center max-w-4xl mx-auto">
           <Card className="p-8">
@@ -27,17 +27,7 @@ export default function Reality() {
                 La cruda realidad…
               </h3>
               <p className="text-l text-gray-800 ">
-                Sabes lo que dicen las redes sociales: "Haz esto para un vientre
-                plano", "Elimina la ansiedad", "Recupera tu energía".
-                <br />
-                Pero tú y yo sabemos que, para las que ya pasamos los 50, la
-                historia no es tan sencilla. No se trata solo de levantar pesas
-                o comer más vegetales.
-                <br />
-                Las fórmulas mágicas que prometen resultados rápidos simplemente
-                no funcionan como antes.
-                <br />
-                <span className="font-bold">Y eso no es culpa tuya.</span>
+              Sabes lo que dicen las redes sociales: "Haz esto para un vientre plano", "Recupera tu energía". Pero tú y yo sabemos que, para las que ya pasamos los 50, la historia no es tan sencilla. No se trata solo de levantar pesas y comer más vegetales.
               </p>
             </div>
             <ul className="space-y-4">
@@ -54,15 +44,12 @@ export default function Reality() {
                 </li>
               ))}
             </ul>
+            <p className="text-2xl text-center text-gray-600 mt-8  max-w-2xl mx-auto">
+              Y no, no es falta de voluntad ni disciplina. Es tu cuerpo pidiendo a
+              gritos un enfoque distinto, adaptado a ti, a tu momento.
+            </p>
           </Card>
         </div>
-      </div>
-      <div className="mt-12">
-        <p className="text-2xl text-center text-gray-600  max-w-2xl mx-auto">
-          Y no, no es falta de voluntad ni disciplina. Es tu cuerpo pidiendo a
-          gritos un enfoque distinto, adaptado a ti, a tu momento.
-        </p>
-        <h3 className="text-3xl mt-8 font-black text-center">Tranquila</h3>
       </div>
     </section>
   );

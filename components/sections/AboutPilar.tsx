@@ -6,24 +6,21 @@ import Image from 'next/image';
 
 export default function AboutPilar() {
   return (
-    <section className="py-20 bg-white relative">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          {/* Image container with sticky positioning */}
-          <div className="relative">
-            <div className="sticky top-8" style={{ height: '600px' }}>
-              <Image
+    <section className="py-20 relative max-w-[960px] mx-auto">
+      <div className="mx-auto px-4">
+        <div className="flex flex-col gap-12 items-center max-w-6xl mx-auto">         
+
+          <div>
+              <img
                 src="/pilar.jpg"
                 alt="Pilar Benitez"
-                fill
-                className="object-cover rounded-2xl"
+                className="rounded-2xl w-full"
               />
-            </div>
           </div>
-
           <div className="space-y-8">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-black mb-6">
+            
+            <div className='flex flex-col text-left'>
+              <h2 className="text-3xl md:text-4xl font-black mb-6 text-center">
                 ¿Quién soy yo? Te cuento mi historia…
               </h2>
               <p className="text-gray-600 mb-4">

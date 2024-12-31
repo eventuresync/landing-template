@@ -10,20 +10,14 @@ const testimonials = [
 
 export default function VideoVSL() {
   return (
-    <section className="pt-10 pb-20 bg-white">
+    <section className="pt-10 pb-20 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-black text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-black text-center mb-2">
           ¿En qué consiste mi metodología?
         </h2>
         <p className="text-xl text-center text-gray-600  max-w-2xl mx-auto">
-          En este vídeo, descubrirás cómo en{' '}
-          <span className="font-bold">6 meses</span> puedes{' '}
-          <span className="font-bold">
-            deshinchar tu abdomen, perder el peso acumulado, recuperar tu
-            energía
-          </span>{' '}
-          y empezar a levantarte como una{' '}
-          <span className="font-bold">mujer radiante.</span>
+          Descubre cómo en <span className="font-bold">6 meses</span> puedes <span className="font-bold">deshinchar tu abdomen,
+          perder el peso acumulado, recuperar tu energía:</span>
         </p>
 
         <p className="text-xl text-center text-gray-800 mt-8  max-w-2xl mx-auto">

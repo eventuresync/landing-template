@@ -38,7 +38,7 @@ import Testimonials2 from '@/components/sections/StudentResults';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-gray-50">
       <Header />
       <Hero />
       <Reality />

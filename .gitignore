@@ -11,6 +11,9 @@
 # next.js
 /.next/
 /out/
+.bolt
+.next
+.out
 
 # production
 /build
