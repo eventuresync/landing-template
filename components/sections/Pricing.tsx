@@ -6,16 +6,16 @@ import { Button } from '@/components/ui/button';
 
 export default function Pricing() {
   return (
-    <section className="pb-20 pt-10 bg-gray-50 max-w-[960px] mx-auto">
+    <section id="pricing" className="pb-20 pt-10 bg-gray-50 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
-        <p className="text-l text-gray-600 text-center">Es hora de que…</p>
-        <p className="text-2xl text-center text-[#4A4A4A] font-bold mb-12 max-w-2xl mx-auto">
-          Comiences a deshincharte, recuperar tu energía
-          <br />y eliminar los síntomas de la menopausia
+        <p className="text-l sm:text-xl text-[#444] text-center">Es hora de que…</p>
+        <p className="text-[1rem] sm:text-[1.5rem] leading-tight text-black text-center font-bold mb-12 max-w-2xl mx-auto">
+          Comiences a <span className='underline underline-offset-4 decoration-pink-500'>deshincharte</span>, <span className='underline underline-offset-4 decoration-pink-500'>recuperar tu energía</span>
+          <br />y <span className='underline underline-offset-4 decoration-pink-500'>eliminar los síntomas de la menopausia</span>
         </p>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <Card className="p-8 md:p-12 h-full flex flex-col">
+          <Card className="p-8 md:px-12 md:py-8 h-full flex flex-col">
             <div className="text-center mb-12">
               <h3 className="text-xl font-bold text-[#FF3366] mb-2">
                 Curso
@@ -26,7 +26,7 @@ export default function Pricing() {
               <div className="w-16 h-0.5 bg-[#FF3366] mx-auto mt-4"></div>
             </div>
             <div className="text-center mb-8">
-              <div className="text-4xl md:text-5xl font-black text-[#FF3366] mt-2">
+              <div className="text-3xl md:text-4xl font-black text-[#FF3366] mt-2">
                 347€
               </div>
               <p className="text-gray-600 mt-2">2 cuotas</p>
@@ -36,34 +36,34 @@ export default function Pricing() {
 
 
             <div className="flex justify-center items-center mb-4">
-              <span className="text-2xl font-bold text-gray-800">
+              <span className="text-2xl font-bold text-black">
                 Lo que recibes
               </span>
             </div>
             
             <div className="space-y-4 mb-8 flex-grow">
               {[
-                'Acceso de por vida al contenido',
-                'Actualizaciones gratuitas',
-                'Comunidad privada de apoyo',
-                'Plantillas y recursos descargables',
-                'Certificado de finalización',
-                'Bonus: 30 días de mentoría grupal',
+                '12 módulos paso a paso para que tomes acción por tu cuenta',
+                '140+ recetas fáciles y deliciosas',
+                'El método del batch-cooking',
+                'Menús semanales y listas de compras',
+                'Soporte diario y comunidad por chat',
+                '<b>BONOS EXTRA:</b> Guia para saber escoger en restaurantes y lista de snacks anti-hinchazón'
               ].map((feature, i) => (
                 <div key={i} className="flex items-start space-x-3">
                   <Check className="w-5 h-5 text-[#FF3366] mt-1 flex-shrink-0" />
-                  <span>{feature}</span>
+                  <span dangerouslySetInnerHTML={{__html: feature}} />
                 </div>
               ))}
             </div>
 
-            <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 text-lg rounded-full mt-auto uppercase font-bold">
+            <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-10 text-lg rounded-full mt-auto uppercase font-bold">
               ¡Empieza hoy!
             </Button>
           </Card>
 
-          <Card className="p-8 md:p-12 h-full flex flex-col">
-          <div className="text-center mb-12">
+          <Card className="p-8 md:px-12 md:py-8 h-full flex flex-col">
+          <div className="text-center mb-10">
               <h3 className="text-xl font-bold text-[#FF3366] mb-2">
                 Mentoría
               </h3>
@@ -74,7 +74,7 @@ export default function Pricing() {
             </div>
 
             <div className="text-center mb-8">
-              <h4 className="text-2xl font-bold mb-4 mt-4">
+              <h4 className="text-2xl font-black mb-4 mt-4 text-[#FF3366]">
                 Mentoría Premium con Pilar
               </h4>
               <p className="text-gray-600">
@@ -84,7 +84,7 @@ export default function Pricing() {
             </div>
 
             <div className="flex justify-center items-center mb-4">
-              <span className="text-2xl font-bold text-gray-800">
+              <span className="text-2xl font-bold text-black">
                 Lo que recibes
               </span>
             </div>
@@ -106,7 +106,7 @@ export default function Pricing() {
               ))}
             </div>
 
-            <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 text-lg font-bold rounded-full mt-auto uppercase">
+            <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-10 text-lg font-bold rounded-full mt-auto uppercase">
               ¡Quiero Aplicar a la Mentoría!
             </Button>
           </Card>

@@ -19,10 +19,10 @@ export default function ProgramIncludes() {
     <section className="pt-10 pb-20 bg-gray-50 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="text-center">Opción 2: </div>
-        <h2 className="text-3xl md:text-4xl font-black text-center mb-4">
+        <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight font-black text-center mb-4">
           Mentoría Autocuidarse 50+
         </h2>
-        <p className="text-xl text-center text-gray-600 mb-6 max-w-2xl mx-auto">
+        <p className="text-l sm:text-xl text-center text-[#444] mb-6 max-w-2xl mx-auto">
           ¿Prefieres un acompañamiento más personalizado?
           <br />
           Entonces, esta mentoría es para ti.
@@ -56,6 +56,7 @@ export default function ProgramIncludes() {
         <Button
           size="xl"
           className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-2xl rounded-full"
+          anchorId='pricing'
         >
           ¡Esto es para mi!
         </Button>

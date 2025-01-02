@@ -26,7 +26,7 @@ export default function Reality() {
               <h3 className="text-3xl lg:text-5xl text-center text-white font-bold">
                 La cruda realidad…
               </h3>
-              <p className="text-xl font-medium text-[#aaaaaa] mt-2 mb-2">
+              <p className="text-xl text-[#aaaaaa] mt-2 mb-2">
               Sabes lo que dicen las redes sociales: "Haz esto para un vientre plano", "Recupera tu energía". Pero tú y yo sabemos que, <span className='text-white'>para las que ya pasamos los 50, la historia no es tan sencilla. No se trata solo de levantar pesas y comer más vegetales.</span>
               </p>
             </div>
@@ -40,7 +40,7 @@ export default function Reality() {
                     }}
                     className="mt-1 text-[#FF3366]"
                   />
-                  <div className='text-xl font-medium text-[#aaaaaa]' dangerouslySetInnerHTML={{ __html: item || '' }}></div>
+                  <div className='text-xl text-[#aaaaaa]' dangerouslySetInnerHTML={{ __html: item || '' }}></div>
                 </li>
               ))}
             </ul>

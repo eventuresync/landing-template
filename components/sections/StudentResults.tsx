@@ -20,7 +20,7 @@ export default function Testimonials2() {
     <section className="pb-16 pt-8 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="mb-6">
-          <h2 className="text-3xl md:text-4xl font-black text-center mb-2">
+          <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight font-black text-center mb-2">
           Descubre cómo mujeres como tú <br/>
           transformaron su vida con mi metodología ❤️
           </h2>

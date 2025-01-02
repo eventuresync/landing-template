@@ -21,22 +21,22 @@ const courseIncludesList = [
 
 export default function CourseIncludes() {
   return (
-    <section className="py-20 bg-gray-50 max-w-[960px] mx-auto">
+    <section className="py-10 bg-gray-50 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
-        <div className="mb-24">
-          <h2 className="text-3xl md:text-5xl font-black text-center mb-2">
+        <div className="mb-12">
+          <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight text-black text-center mb-2">
             Dos caminos, un mismo objetivo.
           </h2>
-          <p className="text-xl text-center text-gray-600  max-w-2xl mx-auto">
+          <p className="text-l sm:text-xl leading-tight text-[#444] text-center max-w-2xl mx-auto">
             ¡Escoge tu camino hacia el bienestar!
           </p>
         </div>
 
-        <div className="text-center">Opción 1: </div>
-        <h2 className="text-3xl md:text-4xl font-black text-center mb-4">
+        <div className="text-center text-[#444]">Opción 1: </div>
+        <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight text-black text-center mb-4">
           Curso Deshincharse 50+
         </h2>
-        <p className="text-xl text-center text-gray-600 mb-6 max-w-2xl mx-auto">
+        <p className="text-l sm:text-xl text-center text-center text-[#444] mb-6 max-w-2xl mx-auto">
           Un <span className="font-bold">programa de alimentación</span>{' '}
           diseñado <span className="font-bold">paso a paso,</span> para que en 6
           meses logres eliminar la hinchazón, recuperar tu energía y eliminar
@@ -49,7 +49,7 @@ export default function CourseIncludes() {
           <Card className="p-8 px-[30px] lg:px-[130px]">
             <div className="flex flex-col items-center gap-3 mb-6">
               <UserCheck className="w-12 h-12 text-[#FF3366]" />
-              <h3 className="text-3xl lg:text-5xl text-center font-bold">
+              <h3 className="text-3xl lg:text-5xl text-black text-center font-bold">
                 ¿Qué incluye el curso?
               </h3>
             </div>

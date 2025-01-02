@@ -2,17 +2,17 @@
 
 export default function Autocuidarse() {
   return (
-    <section className="pb-16 pt-8 max-w-[960px] mx-auto">
+    <section className="pb-8 pt-8 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="">
-          <h2 className="text-xl md:text-2xl font-black text-center mb-2">
+          <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight text-[#444] text-center mb-2">
             Pues tengo buenas noticias: esa metodología <br/>
             que estabas buscando ya existe.
           </h2>
-          <p className="text-l py-4 text-center text-gray-600  max-w-2xl mx-auto">
+          <p className="text-[1rem] sm:text-[1.5rem] leading-tight text-[#444] text-l py-4 text-center max-w-2xl mx-auto">
             Y hoy quiero darte la bienvenida a…
           </p>
-          <h2 className="text-2xl md:text-3xl font-black text-center">
+          <h2 className="text-[2rem] sm:text-[2.5rem] leading-tight text-black text-center">
             ✨ Autocuidarse 50+ ✨
           </h2>
         </div>
