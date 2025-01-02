@@ -23,10 +23,10 @@ export default function Reality() {
           <Card className="p-8 px-[30px] bg-[#171717] lg:px-[130px]">
             <div className="flex flex-col items-center gap-3 mb-6">
               <LeafyGreen className="w-12 h-12 text-[#FF3366]" />
-              <h3 className="text-3xl lg:text-5xl text-center text-white font-bold">
+              <h3 className="text-2xl sm:text-3xl lg:text-[2.5rem] text-center text-white font-bold">
                 La cruda realidad…
               </h3>
-              <p className="text-xl text-[#aaaaaa] mt-2 mb-2">
+              <p className="text:lg sm:text-xl text-[#aaaaaa] mt-2 mb-2">
               Sabes lo que dicen las redes sociales: "Haz esto para un vientre plano", "Recupera tu energía". Pero tú y yo sabemos que, <span className='text-white'>para las que ya pasamos los 50, la historia no es tan sencilla. No se trata solo de levantar pesas y comer más vegetales.</span>
               </p>
             </div>
@@ -40,11 +40,11 @@ export default function Reality() {
                     }}
                     className="mt-1 text-[#FF3366]"
                   />
-                  <div className='text-xl text-[#aaaaaa]' dangerouslySetInnerHTML={{ __html: item || '' }}></div>
+                  <div className='text:lg sm:text-xl text-[#aaaaaa]' dangerouslySetInnerHTML={{ __html: item || '' }}></div>
                 </li>
               ))}
             </ul>
-            <p className="text-xl text-center font-medium text-white  mt-8  max-w-2xl mx-auto">
+            <p className="text:lg sm:text-xl text-center font-medium text-white  mt-8  max-w-2xl mx-auto">
               Y no, no es falta de voluntad ni disciplina. Es tu cuerpo <br/>
               pidiendo a gritos un enfoque distinto, adaptado a ti, <br/>
               a tu momento.
