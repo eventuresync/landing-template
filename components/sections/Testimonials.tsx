@@ -20,14 +20,14 @@ export default function Testimonials() {
     <section className="pb-16 pt-8 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="mb-8">
-          <div className="text-[1rem] sm:text-[2rem] leading-tight text-[#444] text-center mb-2">Tranquila</div>
+          <div className="text-[1rem] sm:text-[1.5rem] leading-tight text-[#444] text-center mb-2">Tranquila</div>
 
-          <h2 className="text-[2rem] sm:text-[2.5rem] leading-tight text-[#444] text-center mb-2">
+          <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight text-[#444] text-center mb-2">
             ¿Y si te dijera que existe una <span className='underline underline-offset-4 decoration-pink-500'>metodología</span> <br/>
             <span className='underline underline-offset-4 decoration-pink-500'>sencilla</span> que ya ha cambiado la vida <br/>
             de decenas de mujeres 50+?
           </h2>
-          <p className="text-[1rem] sm:text-[2rem] leading-tight text-[#444] pt-4 text-center  max-w-2xl mx-auto">
+          <p className="text-[2rem] sm:text-[1.5rem] leading-tight text-[#444] pt-4 text-center  max-w-2xl mx-auto">
             Mujeres como ellas…
           </p>
         </div>
