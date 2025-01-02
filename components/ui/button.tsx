@@ -25,7 +25,7 @@ const buttonVariants = cva(
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
-        xl: 'h-24 px-16 py-8'
+        xl: 'h-18 px-12 py-4 sm:h-24 sm:px-16 sm:py-8'
       },
     },
     defaultVariants: {
@@ -39,7 +39,7 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
-  anchorId?: string; // ID de anclaje opcional para <a>
+  anchorId?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(

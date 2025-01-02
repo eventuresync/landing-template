@@ -21,7 +21,7 @@ export default function Hero() {
 
       <Button
         size="xl"
-        className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-2xl rounded-full"
+        className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-xl sm:text-2xl rounded-full"
         anchorId='pricing'
       >
         ¡Empieza hoy mismo!
