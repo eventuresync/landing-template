@@ -1,21 +1,30 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Card } from "@/components/ui/card";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 
 const testimonialSchema = z.object({
-  testimonials: z.array(z.object({
-    name: z.string().min(1, "Name is required"),
-    image: z.string().url("Must be a valid URL"),
-    content: z.string().min(1, "Content is required"),
-  })),
+  testimonials: z.array(
+    z.object({
+      name: z.string().min(1, "Name is required"),
+      image: z.string().url("Must be a valid URL"),
+      content: z.string().min(1, "Content is required"),
+    })
+  ),
 });
 
 type TestimonialsFormProps = {
@@ -24,19 +33,26 @@ type TestimonialsFormProps = {
   saving: boolean;
 };
 
-export default function TestimonialsForm({ data, onSave, saving }: TestimonialsFormProps) {
+export default function TestimonialsForm({
+  data,
+  onSave,
+  saving,
+}: TestimonialsFormProps) {
   const form = useForm({
     resolver: zodResolver(testimonialSchema),
     defaultValues: {
-      testimonials: data?.testimonials || [{
-        name: "",
-        image: "",
-        content: "",
-      }],
+      testimonials: data?.testimonials || [
+        {
+          name: "",
+          image: "",
+          content: "",
+        },
+      ],
     },
   });
 
-  const { fields, append, remove } = form.useFieldArray({
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
     name: "testimonials",
   });
 
@@ -48,7 +64,9 @@ export default function TestimonialsForm({ data, onSave, saving }: TestimonialsF
             {fields.map((field, index) => (
               <Card key={field.id} className="p-4">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold">Testimonial {index + 1}</h3>
+                  <h3 className="text-lg font-semibold">
+                    Testimonial {index + 1}
+                  </h3>
                   <Button
                     type="button"
                     variant="destructive"

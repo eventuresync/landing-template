@@ -9,15 +9,15 @@ html {
 :root {
   /* Colors */
   --color-primary: #000000;
-  --color-secondary: #FFFFFF; 
-  --color-accent: #9DC45F;
-  --color-error: #FF4B4B;
-  --color-rating: #FFD700;
+  --color-secondary: #ffffff;
+  --color-accent: #9dc45f;
+  --color-error: #ff4b4b;
+  --color-rating: #ffd700;
 
   /* Typography */
-  --font-titles: 'Montserrat', sans-serif;
-  --font-body: 'Montserrat', sans-serif;
-  
+  --font-titles: "Poppins", sans-serif;
+  --font-body: "Poppins", sans-serif;
+
   /* Font sizes */
   --text-h1: clamp(48px, 5vw, 56px);
   --text-h2: clamp(32px, 4vw, 36px);
@@ -30,8 +30,8 @@ html {
 
   /* Borders and shadows */
   --border-radius: 12px;
-  --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
   /* Transitions */
   --transition: all 0.3s ease;
 }
@@ -43,7 +43,12 @@ html {
     line-height: 1.6;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-titles);
     font-weight: 700;
   }
@@ -79,7 +84,7 @@ html {
 
   .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 
   .btn {
@@ -102,7 +107,11 @@ html {
 
 /* Custom utilities */
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-accent) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

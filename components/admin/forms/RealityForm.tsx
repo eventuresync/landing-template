@@ -1,12 +1,19 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Card } from "@/components/ui/card";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 
@@ -22,7 +29,11 @@ type RealityFormProps = {
   saving: boolean;
 };
 
-export default function RealityForm({ data, onSave, saving }: RealityFormProps) {
+export default function RealityForm({
+  data,
+  onSave,
+  saving,
+}: RealityFormProps) {
   const form = useForm({
     resolver: zodResolver(realitySchema),
     defaultValues: {
@@ -32,7 +43,7 @@ export default function RealityForm({ data, onSave, saving }: RealityFormProps) 
     },
   });
 
-  const { fields, append, remove } = form.useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "points",
   });
 

@@ -1,53 +1,72 @@
-import Header from '@/components/layout/Header';
-import Hero from '@/components/sections/Hero';
-import SocialProof from '@/components/sections/SocialProof';
-import AboutPilar from '@/components/sections/AboutPilar';
-import ExpertProfile from '@/components/sections/ExpertProfile';
-import Problems from '@/components/sections/Problems';
-import Features from '@/components/sections/Features';
-import Benefits from '@/components/sections/Benefits';
-import Results from '@/components/sections/Results';
-import StudentResults from '@/components/sections/StudentResults';
-import WhyNow from '@/components/sections/WhyNow';
-import ForWho from '@/components/sections/ForWho';
-import Methodology from '@/components/sections/Methodology';
-import DetailedModules from '@/components/sections/DetailedModules';
-import CourseContent from '@/components/sections/CourseContent';
-import BeforeAfter from '@/components/sections/BeforeAfter';
-import Bonus from '@/components/sections/Bonus';
-import ValueProposition from '@/components/sections/ValueProposition';
-import Testimonials from '@/components/sections/Testimonials';
-import VideoTestimonials from '@/components/sections/VideoTestimonials';
-import LiveSessions from '@/components/sections/LiveSessions';
-import CommunityHighlights from '@/components/sections/CommunityHighlights';
-import Pricing from '@/components/sections/Pricing';
-import Countdown from '@/components/sections/Countdown';
-import PaymentMethods from '@/components/sections/PaymentMethods';
-import Guarantee from '@/components/sections/Guarantee';
-import FAQ from '@/components/sections/FAQ';
-import ActionSteps from '@/components/sections/ActionSteps';
-import CallToAction from '@/components/sections/CallToAction';
-import Footer from '@/components/layout/Footer';
-import ProgramIncludes from '@/components/sections/ProgramIncludes';
-import CourseIncludes from '@/components/sections/CourseInclude';
-import VideoVSL from '@/components/sections/VideoVSL';
-import VideoTestimonial from '@/components/sections/videoTestimonial';
-import Reality from '@/components/sections/Reality';
-import Autocuidarse from '@/components/sections/Autocuidarse';
-import Testimonials2 from '@/components/sections/StudentResults';
+import Header from "@/components/layout/Header";
+import Hero from "@/components/sections/Hero";
+import AboutPilar from "@/components/sections/AboutPilar";
+import Testimonials from "@/components/sections/Testimonials";
+import Pricing from "@/components/sections/Pricing";
+import FAQ from "@/components/sections/FAQ";
+import CallToAction from "@/components/sections/CallToAction";
+import ProgramIncludes from "@/components/sections/ProgramIncludes";
+import CourseIncludes from "@/components/sections/CourseInclude";
+import VideoVSL from "@/components/sections/VideoVSL";
+import VideoTestimonial from "@/components/sections/videoTestimonial";
+import Reality from "@/components/sections/Reality";
+import Autocuidarse from "@/components/sections/Autocuidarse";
+import Testimonials2 from "@/components/sections/StudentResults";
+import { Wrench } from "lucide-react";
+import ModuleHeader from "@/components/sections/ModuleHeader";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#FFF7F7]">
+    <main className="min-h-screen bg-[#f6f7f4] pb-8">
       <Header />
       <Hero />
       <Reality />
       <Testimonials />
       <Autocuidarse />
       <VideoTestimonial />
-      <VideoVSL />
+      <p className="font-bold text-[1rem] sm:text-[1.5rem] leading-tight text-[#444] text-l py-4 text-center max-w-2xl mx-auto">
+        Lo que aprenderás en el curso…
+      </p>
+      <ModuleHeader
+        icon={"🧘‍♀️"}
+        title="La grasa abdominal a tus 50+"
+        description="Entendiendo los nuevos cambios y cómo tu
+cuerpo acumula la grasa corporal.
+"
+      />
+      <ModuleHeader
+        icon={"🌺"}
+        title="Alimentación y menopausia"
+        description="Entendiendo la relación entre tu alimentación y tus síntomas: depresión, ansiedad, baja energía, sofocos, sequedad."
+      />
+      <ModuleHeader
+        icon={"🥣"}
+        title="El desayuno perfecto"
+        description="Cómo iniciar el día: el esquema ideal de un desayuno energético y anti-hinchazón."
+      />
+      <ModuleHeader
+        icon={"🥗"}
+        title="El plato de mediodía"
+        description="El esquema ideal del plato del mediodía y sus opciones."
+      />
+      <ModuleHeader
+        icon={"🍲"}
+        title="El plato de cena"
+        description="El esquema ideal del plato de cena y sus opciones."
+      />
+      <ModuleHeader
+        icon={"🍎"}
+        title="Aplanando los picos de azúcar"
+        description="El secreto para alcanzar una energía estable durante todo el día y recuperar tu estado de ánimo."
+      />
+      <ModuleHeader
+        icon={"🕒"}
+        title="7 días de comidas en 2 horas"
+        description="Cómo preparar una semana entera de comidas en pocas horas sin ser experta en la cocina (la herramienta secreta que me ha permitido mantenerme deshinchada por 30+ años)."
+      />
+      {/*  <VideoVSL /> */}
       <CourseIncludes />
-      <ProgramIncludes />
+      {/* <ProgramIncludes /> */}
       <AboutPilar />
       <Pricing />
       <Testimonials2 />

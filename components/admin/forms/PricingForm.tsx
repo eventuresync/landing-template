@@ -1,23 +1,32 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Card } from "@/components/ui/card";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 
 const pricingSchema = z.object({
-  plans: z.array(z.object({
-    name: z.string().min(1, "Name is required"),
-    price: z.string().min(1, "Price is required"),
-    description: z.string().min(1, "Description is required"),
-    features: z.array(z.string().min(1, "Feature cannot be empty")),
-    ctaText: z.string().min(1, "CTA text is required"),
-  })),
+  plans: z.array(
+    z.object({
+      name: z.string().min(1, "Name is required"),
+      price: z.string().min(1, "Price is required"),
+      description: z.string().min(1, "Description is required"),
+      features: z.array(z.string().min(1, "Feature cannot be empty")),
+      ctaText: z.string().min(1, "CTA text is required"),
+    })
+  ),
 });
 
 type PricingFormProps = {
@@ -26,21 +35,27 @@ type PricingFormProps = {
   saving: boolean;
 };
 
-export default function PricingForm({ data, onSave, saving }: PricingFormProps) {
+export default function PricingForm({
+  data,
+  onSave,
+  saving,
+}: PricingFormProps) {
   const form = useForm({
     resolver: zodResolver(pricingSchema),
     defaultValues: {
-      plans: data?.plans || [{
-        name: "",
-        price: "",
-        description: "",
-        features: [""],
-        ctaText: "",
-      }],
+      plans: data?.plans || [
+        {
+          name: "",
+          price: "",
+          description: "",
+          features: [""],
+          ctaText: "",
+        },
+      ],
     },
   });
 
-  const { fields, append, remove } = form.useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "plans",
   });
 
@@ -108,42 +123,51 @@ export default function PricingForm({ data, onSave, saving }: PricingFormProps) 
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Features</label>
-                    {form.watch(`plans.${index}.features`).map((_, featureIndex) => (
-                      <div key={featureIndex} className="flex gap-2">
-                        <FormField
-                          control={form.control}
-                          name={`plans.${index}.features.${featureIndex}`}
-                          render={({ field }) => (
-                            <FormItem className="flex-1">
-                              <FormControl>
-                                <Input {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <Button
-                          type="button"
-                          variant="destructive"
-                          size="icon"
-                          onClick={() => {
-                            const features = form.getValues(`plans.${index}.features`);
-                            form.setValue(
-                              `plans.${index}.features`,
-                              features.filter((_, i) => i !== featureIndex)
-                            );
-                          }}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    ))}
+                    {form
+                      .watch(`plans.${index}.features`)
+                      .map((_: string, featureIndex: number) => (
+                        <div key={featureIndex} className="flex gap-2">
+                          <FormField
+                            control={form.control}
+                            name={`plans.${index}.features.${featureIndex}`}
+                            render={({ field }) => (
+                              <FormItem className="flex-1">
+                                <FormControl>
+                                  <Input {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            size="icon"
+                            onClick={() => {
+                              const features: string[] = form.getValues(
+                                `plans.${index}.features`
+                              );
+                              form.setValue(
+                                `plans.${index}.features`,
+                                features.filter((_, i) => i !== featureIndex)
+                              );
+                            }}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ))}
                     <Button
                       type="button"
                       variant="outline"
                       onClick={() => {
-                        const features = form.getValues(`plans.${index}.features`);
-                        form.setValue(`plans.${index}.features`, [...features, ""]);
+                        const features = form.getValues(
+                          `plans.${index}.features`
+                        );
+                        form.setValue(`plans.${index}.features`, [
+                          ...features,
+                          "",
+                        ]);
                       }}
                       className="w-full"
                     >
@@ -173,13 +197,15 @@ export default function PricingForm({ data, onSave, saving }: PricingFormProps) 
           <Button
             type="button"
             variant="outline"
-            onClick={() => append({
-              name: "",
-              price: "",
-              description: "",
-              features: [""],
-              ctaText: "",
-            })}
+            onClick={() =>
+              append({
+                name: "",
+                price: "",
+                description: "",
+                features: [""],
+                ctaText: "",
+              })
+            }
             className="w-full"
           >
             <Plus className="h-4 w-4 mr-2" />

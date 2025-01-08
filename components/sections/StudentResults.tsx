@@ -1,18 +1,24 @@
-'use client';
+"use client";
 
-import { Card } from '@/components/ui/card';
-/* import { Avatar } from "@/components/ui/avatar";
- */
 export default function Testimonials2() {
   const testimonials = [
     {
-      image: '/testimonial/Maria Andres.png',
+      image: "/testimonial/5.jpg",
     },
     {
-      image: '/testimonial/Angelica.png',
+      image: "/testimonial/4.jpg",
     },
     {
-      image: '/testimonial/Carme.png',
+      image: "/testimonial/6.jpg",
+    },
+    {
+      image: "/testimonial/7.jpg",
+    },
+    {
+      image: "/testimonial/8.jpg",
+    },
+    {
+      image: "/testimonial/9.jpg",
     },
   ];
 
@@ -21,17 +27,21 @@ export default function Testimonials2() {
       <div className="container mx-auto px-4">
         <div className="mb-6">
           <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight font-black text-center mb-2">
-          Descubre cómo mujeres como tú <br/>
-          transformaron su vida con mi metodología ❤️
+            Descubre cómo mujeres como tú <br />
+            transformaron su vida con mi metodología ❤️
           </h2>
         </div>
-        <div className="flex flex-col justify-center items-center  gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 mt-4 gap-4 md:gap-8 max-w-4xl mx-auto">
           {testimonials.map((testimonial, i) => (
-            <Card key={i} className="p-6 max-w-xl ">
-              <div className="flex items-start space-x-4">
-                <img src={testimonial.image} />
+            <div key={i} className="flex justify-center items-center">
+              <div className="max-w-[400px] w-full">
+                <img
+                  src={testimonial.image}
+                  alt="Testimonio"
+                  className="w-full h-auto rounded-lg"
+                />
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>

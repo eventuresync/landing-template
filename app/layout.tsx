@@ -1,17 +1,17 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
-import { SessionProvider } from '@/components/providers/SessionProvider';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
+import { SessionProvider } from "@/components/providers/SessionProvider";
 
-
-const montserrat = Montserrat({ 
-  subsets: ['latin'],
-  display: 'swap',
+const poppins = Poppins({
+  weight: ["400", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: 'Pilar Benitez | Programa Autocuidarte',
-  description: 'Autocuidarte, Sin dietas ultra-rígidas',
+  title: "Pilar Benitez | Programa Autocuidarte",
+  description: "Autocuidarte, Sin dietas ultra-rígidas",
 };
 
 export default function RootLayout({
@@ -21,11 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={montserrat.className}>
-        <SessionProvider>
-          {children}
-        </SessionProvider>
-        </body>
+      <body className={poppins.className}>
+        <SessionProvider>{children}</SessionProvider>
+      </body>
     </html>
   );
 }
