@@ -17,7 +17,7 @@ export default function Autocuidarse() {
             <img src="/autocuidarse.png" className=" md:max-w-xl" />
           </div>
         </div>
-        <p className="text-xl py-4 text-center text-gray-600  max-w-2xl mx-auto">
+        <p className="tracking-wider text-xl py-4 mt-4 text-center text-gray-600  max-w-2xl mx-auto">
           Son mis más de 25 años trabajando con <br /> mujeres, comprimidos en
           una{" "}
           <span className="font-bold">

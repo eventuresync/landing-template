@@ -18,13 +18,13 @@ export default function Reality() {
   return (
     <section className="pt-20 pb-4  max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
-        <div className="flex justify-center items-center max-w-4xl mx-auto">
-          <Card className="p-8 px-[30px] bg-[#010001] pb-10 lg:px-[130px] relative">
+        <div className="flex justify-center items-center max-w-3xl mx-auto">
+          <Card className="rounded-[2rem] p-8 px-[30px] bg-[#010001] pb-10 lg:px-[80px] relative">
             <div className="flex flex-col items-center gap-3 mb-6">
-              <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-[#171717] rounded-full p-6">
-                <LeafyGreen className="w-16 h-16 text-[#FF3366]" />
+              <div className="absolute text-8xl -top-12 left-1/2 transform -translate-x-1/2">
+                🙃
               </div>
-              <h3 className="mt-12 text-2xl sm:text-3xl lg:text-[2.5rem] text-center text-white font-bold">
+              <h3 className="mt-10 text-2xl sm:text-3xl lg:text-[2.5rem] text-center text-white font-bold">
                 La cruda realidad…
               </h3>
               <p className="text:lg sm:text-xl text-[#aaaaaa] mt-2 mb-2">

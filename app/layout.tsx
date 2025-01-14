@@ -4,7 +4,7 @@ import { Poppins } from "next/font/google";
 import { SessionProvider } from "@/components/providers/SessionProvider";
 
 const poppins = Poppins({
-  weight: ["400", "600", "700"],
+  weight: ["200", "300", "400", "600", "700", "800", "900"],
   subsets: ["latin"],
   display: "swap",
 });

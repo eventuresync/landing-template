@@ -11,14 +11,14 @@ const testimonials = [
 export default function Hero() {
   return (
     <section className="text-center px-4 pb-12 pt-0  max-w-[960px] mx-auto">
-      <div className="text-lg sm:text-3xl lg:text-[2.5rem]  lg:leading-tight	 font-bold text-[#444] mb-6">
+      <div className="text-lg sm:text-3xl lg:text-[2.5rem]  lg:leading-tight	 font-extrabold text-[#444] mb-6">
         Cómo deshinchar tu abdomen,
         <br />
         recuperar tu energía y acabar con
         <br />
         los síntomas de la menopausia
       </div>
-      <p className="text-sm sm:text-lg lg:text-xl text-[#444] mb-2 max-w-3xl mx-auto">
+      <p className="text-lg sm:text-xl lg:text-2xl text-[#444] mb-2 max-w-3xl mx-auto">
         Sin dietas rígidas ni ejercicios extenuantes
       </p>
       <div className="grid md:grid-cols-1 mt-4 mb-12 gap-8 max-w-3xl mx-auto">
@@ -46,7 +46,7 @@ export default function Hero() {
 
       <Button
         size="xl"
-        className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-xl sm:text-2xl rounded-full"
+        className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-xl sm:text-2xl rounded-full font-bold"
         anchorId="pricing"
       >
         ¡Empieza hoy mismo!

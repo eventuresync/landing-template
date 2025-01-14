@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-10 bg-[#2a2a2a]">
+    <section id="pricing" className="py-16 bg-[#2a2a2a]">
       <div className="container mx-auto px-4 max-w-[960px]">
         <p className="text-xl sm:text-2xl text-center text-white font-black mb-12 max-w-2xl mx-auto">
           <span className="underline underline-offset-4 decoration-pink-500">
@@ -42,7 +42,7 @@ export default function Pricing() {
                 "140+ recetas fáciles y deliciosas",
                 "Menús semanales y listas de compras",
                 "Soporte diario y comunidad por chat",
-                "<b>Todos los bonos extra</b>: Guia para ordenar en restaurantes, lista de snacks anti-hinchazón y guia de ayuno intermitente",
+                "<b>Todos los bonos extra</b>: Guia para pedir en restaurantes, lista de snacks anti-hinchazón y guia de ayuno intermitente",
               ].map((feature, i) => (
                 <div key={i} className="flex items-start space-x-3">
                   <Check className="w-5 h-5 text-[#FF3366] mt-1 flex-shrink-0" />
@@ -55,7 +55,12 @@ export default function Pricing() {
             </div>
 
             <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 sm:py-10 text-base sm:text-lg rounded-full mt-auto uppercase font-bold">
-              ¡Empieza hoy!
+              <a
+                target="_blank"
+                href="https://pilarbenitez.thinkific.com/courses/deshincharse-50-plus"
+              >
+                ¡Empieza hoy!
+              </a>
             </Button>
           </Card>
 
@@ -85,7 +90,7 @@ export default function Pricing() {
                 "140+ recetas fáciles y deliciosas",
                 "Menús semanales y listas de compras",
                 "Soporte diario y comunidad por chat",
-                "<b>Todos los bonos extra</b>: Guia para ordenar en restaurantes, lista de snacks anti-hinchazón y guia de ayuno intermitente",
+                "<b>Todos los bonos extra</b>: Guia para pedir en restaurantes, lista de snacks anti-hinchazón y guia de ayuno intermitente",
               ].map((feature, i) => (
                 <div key={i} className="flex items-start space-x-3">
                   <Check className="w-5 h-5 text-[#FF3366] mt-1 flex-shrink-0" />
@@ -98,7 +103,12 @@ export default function Pricing() {
             </div>
 
             <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 sm:py-10 text-base sm:text-lg rounded-full mt-auto uppercase font-bold">
-              ¡Empieza hoy!
+              <a
+                target="_blank"
+                href="https://pilarbenitez.thinkific.com/courses/deshincharse-50-plus"
+              >
+                ¡Empieza hoy!
+              </a>
             </Button>
           </Card>
         </div>

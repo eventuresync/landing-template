@@ -18,9 +18,9 @@ export default function AboutPilar() {
           </div>
           <div className="space-y-8">
             <div className="flex flex-col text-left">
-              <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight font-black mb-6 text-center">
+              <div className="text-[1.5rem] sm:text-[2rem] leading-tight font-black mb-6 text-center">
                 ¿Quién soy yo? Te cuento mi historia…
-              </h2>
+              </div>
               <p className="text-[#444] text-l mb-4">
                 ¡Hola! Soy Pilar, una ex-perfeccionista recuperada y orgullosa
                 mujer de 50+ años. Mi vida cambió por completo a los 36, cuando

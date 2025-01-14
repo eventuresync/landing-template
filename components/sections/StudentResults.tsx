@@ -23,7 +23,7 @@ export default function Testimonials2() {
   ];
 
   return (
-    <section className="pb-16 pt-8 max-w-[960px] mx-auto">
+    <section className="pb-16 pt-16 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="mb-6">
           <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight font-black text-center mb-2">
@@ -31,11 +31,12 @@ export default function Testimonials2() {
             transformaron su vida con mi metodología ❤️
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-4 gap-4 md:gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 mt-4 gap-4 md:gap-8 max-w-3xl mx-auto">
           {testimonials.map((testimonial, i) => (
             <div key={i} className="flex justify-center items-center">
               <div className="max-w-[400px] w-full">
                 <img
+                  style={{ boxShadow: "0 4px 20px 0 rgba(0, 0, 0, 0.25)" }}
                   src={testimonial.image}
                   alt="Testimonio"
                   className="w-full h-auto rounded-lg"

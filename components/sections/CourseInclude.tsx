@@ -42,15 +42,15 @@ export default function CourseIncludes() {
           ritmo.
         </p> */}
 
-        <div className="flex justify-center items-center max-w-4xl mx-auto">
-          <Card className="p-8 px-[30px] lg:px-[130px] relative">
+        <div className="flex justify-center items-center max-w-3xl mx-auto">
+          <Card className="rounded-[2rem] p-8 px-[30px] lg:px-[80px] relative">
             <div className="flex flex-col items-center gap-3 mb-6">
-              <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-[#FFE4E4] border border-[#E6D2D2] shadow-sm rounded-full p-6">
-                <UserCheck className="w-16 h-16 text-[#FF3366]" />
+              <div className="absolute text-8xl -top-12 left-1/2 transform -translate-x-1/2">
+                👩🏻‍💻
               </div>
-              <h3 className="mt-12 text-3xl lg:text-5xl text-black text-center font-bold">
+              <div className="mt-10 text-3xl lg:text-5xl text-black text-center font-bold">
                 ¿Qué incluye el curso?
-              </h3>
+              </div>
             </div>
             <ul className="space-y-4">
               {courseIncludesList.map((item, i) => (
@@ -74,7 +74,7 @@ export default function CourseIncludes() {
         <div className="pt-12 flex justify-center items-center">
           <Button
             size="xl"
-            className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-2xl rounded-full"
+            className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-2xl rounded-full font-bold"
             anchorId="pricing"
           >
             ¡Esto es para mi!

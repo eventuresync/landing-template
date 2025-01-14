@@ -55,7 +55,7 @@ cuerpo acumula la grasa corporal.
         description="El esquema ideal del plato de cena y sus opciones."
       />
       <ModuleHeader
-        icon={"🍎"}
+        icon={"💃"}
         title="Aplanando los picos de azúcar"
         description="El secreto para alcanzar una energía estable durante todo el día y recuperar tu estado de ánimo."
       />
