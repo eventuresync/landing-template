@@ -18,7 +18,7 @@ export default function Hero() {
         <br />
         los síntomas de la menopausia
       </div>
-      <p className="text-lg sm:text-xl lg:text-2xl text-[#444] mb-2 max-w-3xl mx-auto">
+      <p className="text-sm sm:text-xl lg:text-2xl text-[#444] mb-2 max-w-3xl mx-auto">
         Sin dietas rígidas ni ejercicios extenuantes
       </p>
       <div className="grid md:grid-cols-1 mt-4 mb-12 gap-8 max-w-3xl mx-auto">

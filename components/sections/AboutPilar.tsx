@@ -8,8 +8,8 @@ export default function AboutPilar() {
   return (
     <section className="pt-20 pb-10 relative max-w-[720px] mx-auto">
       <div className="mx-auto px-4">
-        <div className="flex flex-col gap-12 items-center max-w-6xl mx-auto">
-          <div className="w-[400px] h-[400px]">
+        <div className="flex flex-col gap-12 items-center max-w-3xl sm:max-w-6xl mx-auto">
+          <div className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]">
             <img
               src="/pilar.jpg"
               alt="Pilar Benitez"

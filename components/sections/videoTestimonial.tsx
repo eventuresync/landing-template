@@ -13,10 +13,10 @@ export default function VideoTestimonial() {
   return (
     <section className="pt-12 pb-20 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
-        <h2 className="text-[2rem] sm:text-[2.5rem] leading-tight text-black text-center mb-2">
+        <h2 className="text-2xl sm:text-[2rem] sm:text-[2.5rem] leading-tight text-black text-center mb-2">
           Ellas decidieron tomar acción
         </h2>
-        <p className="text-xl text-center text-[#444] max-w-2xl mx-auto">
+        <p className="text:lg sm:text-xl text-center text-[#444] max-w-2xl mx-auto">
           (¡Hoy viven como mujeres radiantes!)
         </p>
 
