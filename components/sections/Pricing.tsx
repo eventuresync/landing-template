@@ -15,7 +15,7 @@ export default function Pricing() {
           ✨✨
         </p>
 
-        <div className="grid md:grid-cols-2 gap-4 sm:gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           <Card className="p-4 sm:p-8 h-full flex flex-col">
             <div className="text-center mb-8 sm:mb-6 pb-2">
               <h4 className="text-2xl font-black">1 pago único</h4>

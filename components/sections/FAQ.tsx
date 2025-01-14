@@ -52,7 +52,7 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <section className="py-20 max-w-[960px] w-full mx-auto">
+    <section className="pt-0 max-w-[960px] w-full mx-auto">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-black text-center mb-12">
           PREGUNTAS FRECUENTES

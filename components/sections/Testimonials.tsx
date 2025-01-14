@@ -28,7 +28,7 @@ export default function Testimonials() {
     <section className="pb-16 pt-8 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="mb-8">
-          <div className="text-[1rem] sm:text-[1.5rem] leading-tight text-[#444] text-center mb-2">
+          <div className="text-[1.2rem] sm:text-[1.5rem] leading-tight text-[#444] text-center mb-2">
             Tranquila
           </div>
 
@@ -42,7 +42,7 @@ export default function Testimonials() {
             eficaz que ya ha cambiado la vida <br />
             de decenas de mujeres 50+?
           </h2>
-          <p className="text-[2rem] sm:text-[1.5rem] leading-tight text-[#444] pt-8 text-center max-w-2xl mx-auto">
+          <p className="text-xl sm:text-[2rem] sm:text-[1.5rem] leading-tight text-[#444] pt-8 text-center max-w-2xl mx-auto">
             Mujeres como ellas…
           </p>
         </div>
