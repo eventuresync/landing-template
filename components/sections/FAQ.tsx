@@ -60,11 +60,16 @@ export default function FAQ() {
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible>
             {faqs.map((faq, i) => (
-              <AccordionItem key={i} value={`item-${i}`}>
-                <AccordionTrigger className="text-left text-xl font-black">
+              <AccordionItem
+                style={{ boxShadow: "0 4px 20px 0 rgba(0, 0, 0, 0.25)" }}
+                className="p-2 rounded-[1.5rem] mb-4"
+                key={i}
+                value={`item-${i}`}
+              >
+                <AccordionTrigger className="text-left p-2 text-xl font-black">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-lg">
+                <AccordionContent className="text-lg pl-3">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
