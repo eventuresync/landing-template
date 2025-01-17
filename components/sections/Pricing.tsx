@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Pricing() {
   return (
@@ -53,14 +54,11 @@ export default function Pricing() {
               ))}
             </div>
 
-            <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 sm:py-10 text-base sm:text-lg rounded-full mt-auto uppercase font-bold">
-              <a
-                target="_blank"
-                href="https://pilarbenitez.thinkific.com/courses/deshincharse-50-plus"
-              >
+            <Link href="https://pilarbenitez.thinkific.com/courses/deshincharse-50-plus">
+              <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 sm:py-10 text-base sm:text-lg rounded-full mt-auto uppercase font-bold">
                 ¡Empieza hoy!
-              </a>
-            </Button>
+              </Button>
+            </Link>
           </Card>
 
           <Card className="p-4 sm:p-8 h-full flex flex-col">

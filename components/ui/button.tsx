@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
@@ -50,15 +50,16 @@ const Button = React.forwardRef<
 
   if (anchorId) {
     return (
-      <a
-        href={`#${anchorId}`}
-        style={{
-          boxShadow: "rgba(0, 0, 0, 0.7) 0px 1px 5px",
-        }}
-        className={cn(buttonVariants({ variant, size, className }))}
-      >
-        {props.children}
-      </a>
+      <Link href={`#${anchorId}`}>
+        <Comp
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref as React.ForwardedRef<HTMLButtonElement>}
+          style={{
+            boxShadow: "rgba(0, 0, 0, 0.7) 0px 1px 5px",
+          }}
+          {...props}
+        />
+      </Link>
     );
   } else {
     return (
