@@ -15,7 +15,7 @@ export default function Header() {
             className="w-48"
           />
         </div>
-        <p className="mt-2 text-[#444] text-base sm:text-xl text-center px-4">
+        <p className="mt-2 text-[#444] text-lg sm:text-xl text-center px-4">
           Autora de 5 libros para la mujer te revela:
         </p>
       </header>

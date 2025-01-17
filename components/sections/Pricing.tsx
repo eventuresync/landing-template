@@ -24,7 +24,7 @@ export default function Pricing() {
 
             <div className="text-center mb-8  pb-8">
               <div className="text-3xl sm:text-4xl md:text-5xl font-black text-[#FF3366] mt-2">
-                227€
+                347€
               </div>
               <p className="text-gray-600 text-base mt-2">(ahorra 120€)</p>
               <div className="w-full h-0.5 bg-[#FF3366] mx-auto mt-8"></div>
@@ -38,17 +38,16 @@ export default function Pricing() {
 
             <div className="space-y-4 mb-8 flex-grow">
               {[
-                "Acceso inmediato y de por vida al curso",
-                "140+ recetas fáciles y deliciosas",
-                "Menús semanales y listas de compras",
-                "Soporte diario y comunidad por chat",
-                "<b>Todos los bonos extra</b>: Guia para pedir en restaurantes, lista de snacks anti-hinchazón y guia de ayuno intermitente",
+                "Acceso inmediato",
+                "Acceso de por vida",
+                "Soporte diario y comunidad",
+                "<b>Todos los bonos extra</b>",
               ].map((feature, i) => (
                 <div key={i} className="flex items-start space-x-3">
                   <Check className="w-5 h-5 text-[#FF3366] mt-1 flex-shrink-0" />
                   <span
                     dangerouslySetInnerHTML={{ __html: feature }}
-                    className="text-sm sm:text-base"
+                    className="text-lg sm:text-base"
                   />
                 </div>
               ))}
@@ -72,9 +71,9 @@ export default function Pricing() {
 
             <div className="text-center mb-8 pb-8">
               <div className="text-3xl sm:text-4xl md:text-5xl font-black text-[#FF3366] mt-2">
-                173€
+                233.50€
               </div>
-              <p className="text-gray-600 text-base mt-2">(total: 346€)</p>
+              <p className="text-gray-600 text-base mt-2">(total: 467€)</p>
               <div className="w-full h-0.5 bg-[#FF3366] mx-auto mt-8"></div>
             </div>
 
@@ -86,17 +85,16 @@ export default function Pricing() {
 
             <div className="space-y-4 mb-8 flex-grow">
               {[
-                "Acceso inmediato y de por vida al curso",
-                "140+ recetas fáciles y deliciosas",
-                "Menús semanales y listas de compras",
-                "Soporte diario y comunidad por chat",
-                "<b>Todos los bonos extra</b>: Guia para pedir en restaurantes, lista de snacks anti-hinchazón y guia de ayuno intermitente",
+                "Acceso inmediato",
+                "Acceso de por vida",
+                "Soporte diario y comunidad",
+                "<b>Todos los bonos extra</b>",
               ].map((feature, i) => (
                 <div key={i} className="flex items-start space-x-3">
                   <Check className="w-5 h-5 text-[#FF3366] mt-1 flex-shrink-0" />
                   <span
                     dangerouslySetInnerHTML={{ __html: feature }}
-                    className="text-sm sm:text-base"
+                    className="text-lg sm:text-base"
                   />
                 </div>
               ))}

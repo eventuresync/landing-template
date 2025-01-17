@@ -51,13 +51,21 @@ export default function Reality() {
                 </li>
               ))}
             </ul>
-            <p className="text:lg sm:text-xl  mt-8 text-[#aaaaaa] text-center  mx-auto">
+            {/*  <p className="text:lg sm:text-xl  mt-8 text-[#aaaaaa] text-center  mx-auto">
               Y no, no es falta de voluntad{" "}
               <span className="text-white">
                 Es tu cuerpo pidiendo a <br />
                 gritos un enfoque distinto
               </span>
               , adaptado a tu momento.
+            </p> */}
+            <p className="text-lg sm:text-xl mt-8 text-[#aaaaaa] text-center mx-auto leading-relaxed">
+              Y no, no es falta de voluntad{" "}
+              <span className="text-white block sm:inline">
+                Es tu cuerpo pidiendo a <br className="hidden sm:block" />
+                gritos un enfoque distinto,
+              </span>{" "}
+              adaptado a tu momento.
             </p>
           </Card>
         </div>

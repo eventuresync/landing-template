@@ -123,3 +123,66 @@ html {
 .hover-lift:hover {
   transform: translateY(-4px);
 }
+
+@media (min-width: 320px) {
+  .text-hero-mobile {
+    font-size: 1.5rem;
+  }
+  .text-mujeres {
+    font-size: 1rem;
+  }
+  .text-testimonial {
+    font-size: 1rem;
+  }
+  .text-25anios {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 355px) {
+  .text-mujeres {
+    font-size: 1.125rem;
+  }
+  .text-testimonial {
+    font-size: 1.125rem;
+  }
+  .text-25anios {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 375px) {
+  .text-mujeres {
+    font-size: 1.2rem;
+  }
+  .text-testimonial {
+    font-size: 1.2rem;
+  }
+  .text-25anios {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 405px) {
+  .text-mujeres {
+    font-size: 1.3rem;
+  }
+  .text-testimonial {
+    font-size: 1.3rem;
+  }
+  .text-25anios {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 435px) {
+  .text-mujeres {
+    font-size: 1.4rem;
+  }
+  .text-testimonial {
+    font-size: 1.4rem;
+  }
+  .text-25anios {
+    font-size: 1.4rem;
+  }
+}

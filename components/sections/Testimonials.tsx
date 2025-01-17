@@ -32,7 +32,7 @@ export default function Testimonials() {
             Tranquila
           </div>
 
-          <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight text-[#444] text-center mb-2">
+          <div className="hidden sm:block font-black text-testimonial text-[1.5rem] sm:text-[2rem] leading-tight text-[#444] text-center mb-2">
             ¿Y si te dijera que existe una{"  "}
             <span className="underline underline-offset-4 ">
               metodología
@@ -41,7 +41,16 @@ export default function Testimonials() {
             <span className="underline underline-offset-4 ">sencilla</span> y
             eficaz que ya ha cambiado la vida <br />
             de decenas de mujeres 50+?
-          </h2>
+          </div>
+          <div className="sm:hidden font-black text-testimonial text-[1.5rem] sm:text-[2rem] leading-tight text-[#444] text-center mb-2">
+            ¿Y si te dijera que existe una{"  "}
+            <span className="underline underline-offset-4 ">
+              metodología
+            </span>{" "}
+            <span className="underline underline-offset-4 ">sencilla</span> y
+            eficaz que ya ha cambiado la vida de decenas de mujeres 50+?
+          </div>
+
           <p className="text-xl sm:text-[2rem] sm:text-[1.5rem] leading-tight text-[#444] pt-8 text-center max-w-2xl mx-auto">
             Mujeres como ellas…
           </p>

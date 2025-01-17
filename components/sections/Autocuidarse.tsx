@@ -17,7 +17,7 @@ export default function Autocuidarse() {
             <img src="/autocuidarse.png" className=" md:max-w-xl" />
           </div>
         </div>
-        <p className="tracking-wider text-xl py-4 mt-4 text-center text-gray-600  max-w-2xl mx-auto">
+        <p className="hidden sm:block tracking-wider text-xl py-4 mt-4 text-center text-gray-600  max-w-2xl mx-auto">
           Son mis más de 25 años trabajando con <br /> mujeres, comprimidos en
           una{" "}
           <span className="font-bold">
@@ -26,6 +26,14 @@ export default function Autocuidarse() {
           , para que logres <br /> deshincharte, recuperar tu energía y vivir
           tus 50+ <br />
           con equilibrio. 💛
+        </p>
+        <p className="sm:hidden text-25anios tracking-wider text-xl py-4 mt-4 text-center text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          Son mis más de 25 años trabajando con mujeres, comprimidos en una{" "}
+          <span className="font-bold">
+            metodología de alimentación paso a paso,
+          </span>
+          para que logres deshincharte, recuperar tu energía y vivir tus 50+ con
+          equilibrio. 💛
         </p>
       </div>
     </section>

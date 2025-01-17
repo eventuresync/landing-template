@@ -26,10 +26,14 @@ export default function Testimonials2() {
     <section className="pb-16 pt-16 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
         <div className="mb-6">
-          <h2 className="text-[1.5rem] sm:text-[2rem] leading-tight font-black text-center mb-2">
+          <div className="hidden sm:block text-[1.5rem] sm:text-[2rem] leading-tight font-black text-center mb-2">
             Descubre cómo mujeres como tú <br />
             transformaron su vida con mi metodología ❤️
-          </h2>
+          </div>
+          <div className="text-mujeres sm:hidden text-[1.5rem] sm:text-[2rem] leading-tight font-black text-center mb-2">
+            Descubre cómo mujeres como tú transformaron su vida con mi
+            metodología ❤️
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 mt-4 gap-4 md:gap-8 max-w-3xl mx-auto">
           {testimonials.map((testimonial, i) => (
