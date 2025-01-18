@@ -8,7 +8,7 @@ export default function Testimonials() {
       image: "/testimonial/ana calzado.jpeg",
     },
     {
-      image: "/testimonial/Rosa.png",
+      image: "/testimonial/Rosa.jpg",
     },
     {
       image: "/testimonial/1.jpg",
