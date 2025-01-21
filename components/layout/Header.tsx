@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 
-export default function Header() {
+interface HeaderProps {
+  data: any;
+}
+
+export default function Header({ data }: HeaderProps) {
+  const { profileImage, subtitle } = data?.fields || {};
+
   return (
     <div className="max-w-[960px] mx-auto mb-4">
       <header className="flex flex-col items-center pt-6 pb-2">

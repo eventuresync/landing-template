@@ -5,17 +5,59 @@ import Testimonials from "@/components/sections/Testimonials";
 import Pricing from "@/components/sections/Pricing";
 import FAQ from "@/components/sections/FAQ";
 import CallToAction from "@/components/sections/CallToAction";
-import ProgramIncludes from "@/components/sections/ProgramIncludes";
 import CourseIncludes from "@/components/sections/CourseInclude";
-import VideoVSL from "@/components/sections/VideoVSL";
 import VideoTestimonial from "@/components/sections/videoTestimonial";
 import Reality from "@/components/sections/Reality";
 import Autocuidarse from "@/components/sections/Autocuidarse";
 import Testimonials2 from "@/components/sections/StudentResults";
-import { Wrench } from "lucide-react";
 import ModuleHeader from "@/components/sections/ModuleHeader";
+import {
+  getHeader,
+  getHero,
+  getReality,
+  getTestimonials,
+  getAutocuidarse,
+  getVideoTestimonial,
+  getModules,
+  getCourseIncludes,
+  getAboutPilar,
+  getPricing,
+  getStudentResults,
+  getFAQ,
+  getCallToAction,
+} from "@/lib/contentful";
 
-export default function Home() {
+export default async function Home() {
+  const [
+    header,
+    hero,
+    reality,
+    testimonials,
+    autocuidarse,
+    videoTestimonial,
+    modules,
+    courseIncludes,
+    aboutPilar,
+    pricing,
+    studentResults,
+    faq,
+    callToAction,
+  ] = await Promise.all([
+    getHeader(),
+    getHero(),
+    getReality(),
+    getTestimonials(),
+    getAutocuidarse(),
+    getVideoTestimonial(),
+    getModules(),
+    getCourseIncludes(),
+    getAboutPilar(),
+    getPricing(),
+    getStudentResults(),
+    getFAQ(),
+    getCallToAction(),
+  ]);
+
   return (
     <main className="min-h-screen bg-[#f6f7f4] pb-8">
       <Header />

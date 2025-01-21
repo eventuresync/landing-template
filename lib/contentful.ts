@@ -1,42 +1,109 @@
-import { createClient } from 'contentful';
-import { createClient as createManagementClient } from 'contentful-management';
+import { createClient } from "contentful";
 
 const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID! || "i8i7ymflqy95",
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN! || "KTULXRsqQYVR3t9OzCDAuMfKYabnmbiXaoS6oH53Fl8",
+  space: process.env.CONTENTFUL_SPACE_ID!,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
 });
 
-const managementClient = createManagementClient({
-  accessToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN! || "KTULXRsqQYVR3t9OzCDAuMfKYabnmbiXaoS6oH53Fl8",
-});
-
-export async function getEntry(entryId: string) {
-  try {
-    const entry = await client.getEntry(entryId);
-    return entry;
-  } catch (error) {
-    console.error('Error fetching entry:', error);
-    throw error;
-  }
+export async function getHeader() {
+  const entry = await client.getEntries({
+    content_type: "header",
+    limit: 1,
+  });
+  return entry.items[0];
 }
 
-export async function updateEntry(entryId: string, fields: any) {
-  try {
-    const space = await managementClient.getSpace(process.env.CONTENTFUL_SPACE_ID!);
-    const environment = await space.getEnvironment('master');
-    const entry = await environment.getEntry(entryId);
+export async function getHero() {
+  const entry = await client.getEntries({
+    content_type: "hero",
+    limit: 1,
+  });
+  return entry.items[0];
+}
 
-    entry.fields = {
-      ...entry.fields,
-      ...fields,
-    };
+export async function getReality() {
+  const entry = await client.getEntries({
+    content_type: "reality",
+    limit: 1,
+  });
+  return entry.items[0];
+}
 
-    const updatedEntry = await entry.update();
-    await updatedEntry.publish();
+export async function getTestimonials() {
+  const entry = await client.getEntries({
+    content_type: "testimonials",
+    limit: 1,
+  });
+  return entry.items[0];
+}
 
-    return updatedEntry;
-  } catch (error) {
-    console.error('Error updating entry:', error);
-    throw error;
-  }
+export async function getAutocuidarse() {
+  const entry = await client.getEntries({
+    content_type: "program",
+    limit: 1,
+  });
+  return entry.items[0];
+}
+
+export async function getVideoTestimonial() {
+  const entry = await client.getEntries({
+    content_type: "videoTestimonial",
+    limit: 1,
+  });
+  return entry.items[0];
+}
+
+export async function getModules() {
+  const entries = await client.getEntries({
+    content_type: "module",
+  });
+  return entries.items;
+}
+
+export async function getCourseIncludes() {
+  const entry = await client.getEntries({
+    content_type: "courseIncludes",
+    limit: 1,
+  });
+  return entry.items[0];
+}
+
+export async function getAboutPilar() {
+  const entry = await client.getEntries({
+    content_type: "aboutPilar",
+    limit: 1,
+  });
+  return entry.items[0];
+}
+
+export async function getPricing() {
+  const entry = await client.getEntries({
+    content_type: "pricing",
+    include: 2,
+  });
+  return entry.items[0];
+}
+
+export async function getStudentResults() {
+  const entry = await client.getEntries({
+    content_type: "studentResults",
+    limit: 1,
+  });
+  return entry.items[0];
+}
+
+export async function getFAQ() {
+  const entry = await client.getEntries({
+    content_type: "faq",
+    include: 2,
+  });
+  return entry.items[0];
+}
+
+export async function getCallToAction() {
+  const entry = await client.getEntries({
+    content_type: "callToAction",
+    limit: 1,
+  });
+  return entry.items[0];
 }
