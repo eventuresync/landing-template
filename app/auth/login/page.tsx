@@ -64,9 +64,7 @@ export default function LoginPage() {
           <div className="mx-auto h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
             <Lock className="h-6 w-6 text-primary" />
           </div>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">
-            Admin Login
-          </h2>
+          <h2 className="mt-6 text-3xl font-bold text-gray-900">Admin Login</h2>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -108,7 +106,7 @@ export default function LoginPage() {
 
           <Button
             type="submit"
-            className="w-full"
+            className="w-full text-white"
             disabled={isLoading}
           >
             {isLoading ? "Signing in..." : "Sign in"}

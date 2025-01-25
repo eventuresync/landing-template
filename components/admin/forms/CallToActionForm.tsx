@@ -16,73 +16,59 @@ import {
 } from "@/components/ui/form";
 import { Card } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
-import Reality from "@/components/sections/Reality";
+import CallToAction from "@/components/sections/CallToAction";
 import dynamic from "next/dynamic";
 const RichTextEditor = dynamic(() => import("react-quill"), { ssr: false });
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { htmlToRichText } from "@/lib/htmlParser";
 
-const RealitySchema = z.object({
-  finalNote: z.string().optional(),
-  points: z.string().optional(),
-  subtitle: z.string().optional(),
+const callToActionSchema = z.object({
   title: z.string().optional(),
-  icon: z.string().optional(),
+  sub: z.any().optional(),
+  buttonText: z.string().optional(),
 });
 
-type RealityFormProps = {
+type CallToActionProps = {
   data: any;
   onSave: (data: any) => void;
   saving: boolean;
 };
 
-export default function HeroForm({ data, onSave, saving }: RealityFormProps) {
-  const subInitialHTML = data?.points?.json
-    ? documentToHtmlString(data.points.json)
-    : "";
-
-  const finalHTML = data?.finalNote?.json
-    ? documentToHtmlString(data.finalNote.json)
+export default function CallToActionForm({
+  data,
+  onSave,
+  saving,
+}: CallToActionProps) {
+  const subInitialHTML = data?.sub?.json
+    ? documentToHtmlString(data.sub.json)
     : "";
 
   const form = useForm({
-    resolver: zodResolver(RealitySchema),
+    resolver: zodResolver(callToActionSchema),
     defaultValues: {
-      finalNote: finalHTML,
-      points: subInitialHTML,
-      subtitle: data?.subtitle || "",
       title: data?.title || "",
-      icon: data?.icon || "",
+      sub: subInitialHTML, // HTML inicial para el editor
+      buttonText: data?.buttonText || "",
     },
   });
 
-  const handleSubmit = (formData: any) => {
+  const handleSubmit = async (formData: any) => {
     const changedFields: any = {
       entryId: data?.sys?.id,
     };
-
-    if (formData.finalNote !== finalHTML) {
-      // Convierte HTML a Rich Text JSON usando la nueva función
-      const richTextJSON = htmlToRichText(formData.finalNote);
-      changedFields.finalNote = richTextJSON;
-    }
-
-    if (formData.points !== subInitialHTML) {
-      // Convierte HTML a Rich Text JSON usando la nueva función
-      const richTextJSON = htmlToRichText(formData.points);
-      changedFields.points = richTextJSON;
-    }
-
-    if (formData.subtitle !== data?.subtitle) {
-      changedFields.subtitle = formData.subtitle;
-    }
 
     if (formData.title !== data?.title) {
       changedFields.title = formData.title;
     }
 
-    if (formData.icon !== data?.icon) {
-      changedFields.icon = formData.icon;
+    if (formData.sub !== subInitialHTML) {
+      // Convierte HTML a Rich Text JSON usando la nueva función
+      const richTextJSON = htmlToRichText(formData.sub);
+      changedFields.sub = richTextJSON;
+    }
+
+    if (formData.buttonText !== data?.buttonText) {
+      changedFields.buttonText = formData.buttonText;
     }
 
     if (Object.keys(changedFields).length > 0) {
@@ -114,12 +100,15 @@ export default function HeroForm({ data, onSave, saving }: RealityFormProps) {
 
               <FormField
                 control={form.control}
-                name="subtitle"
+                name="sub"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Subtitle</FormLabel>
                     <FormControl>
-                      <Textarea {...field} />
+                      <RichTextEditor
+                        value={field.value} // HTML inicial del editor
+                        onChange={field.onChange} // Actualiza el formulario
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -128,46 +117,12 @@ export default function HeroForm({ data, onSave, saving }: RealityFormProps) {
 
               <FormField
                 control={form.control}
-                name="icon"
+                name="buttonText"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Icono</FormLabel>
+                    <FormLabel>CTA Text</FormLabel>
                     <FormControl>
                       <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="points"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Puntos</FormLabel>
-                    <FormControl>
-                      <RichTextEditor
-                        value={field.value} // HTML inicial del editor
-                        onChange={field.onChange} // Actualiza el formulario
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="finalNote"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nota final</FormLabel>
-                    <FormControl>
-                      <RichTextEditor
-                        value={field.value} // HTML inicial del editor
-                        onChange={field.onChange} // Actualiza el formulario
-                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -177,21 +132,15 @@ export default function HeroForm({ data, onSave, saving }: RealityFormProps) {
             <div className="space-y-4">
               <h3 className="font-semibold">Preview</h3>
               <div className="border rounded-lg p-4 bg-[#f6f7f4]">
-                <Reality
+                <CallToAction
+                  buttonText={form.watch("buttonText") || data?.buttonText}
                   title={form.watch("title") || data?.title}
-                  subtitle={form.watch("subtitle") || data?.subtitle}
-                  icon={form.watch("icon") || data?.icon}
-                  points={
-                    form.watch("points")
-                      ? { json: htmlToRichText(form.watch("points")) }
-                      : data?.points
+                  sub={
+                    form.watch("sub")
+                      ? { json: htmlToRichText(form.watch("sub")) }
+                      : data?.sub
                   }
-                  finalNote={
-                    form.watch("finalNote")
-                      ? { json: htmlToRichText(form.watch("finalNote")) }
-                      : data?.finalNote
-                  }
-                  __typename="Reality"
+                  __typename="CallToAction"
                 />
               </div>
             </div>

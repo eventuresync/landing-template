@@ -18,8 +18,13 @@ import { Loader2, Upload } from "lucide-react";
 import Header from "@/components/layout/Header";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import Autocuidarse from "@/components/sections/Autocuidarse";
+import dynamic from "next/dynamic";
+const RichTextEditor = dynamic(() => import("react-quill"), { ssr: false });
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { htmlToRichText } from "@/lib/htmlParser";
 
-const headerSchema = z.object({
+const ProgramSchema = z.object({
   image: z
     .object({
       url: z.string().url("Must be a valid URL").optional(),
@@ -27,30 +32,33 @@ const headerSchema = z.object({
       fileName: z.string().optional(),
     })
     .optional(),
-  title: z.string().optional(),
+  desc: z.string().optional(),
+  mainTitle: z.string().optional(),
+  welcomeText: z.string().optional(),
+  descMobile: z.string().optional(),
 });
 
-type HeaderFormProps = {
+type ProgramFormProps = {
   onSave: (data: any) => void;
   onChange: () => void;
   saving: boolean;
-  data?: {
-    sys: {
-      id: string;
-    };
-    image?: {
-      url: string;
-    };
-    title?: string;
-  };
+  data?: any;
 };
 
-export default function HeaderForm({
+export default function ProgramForm({
   onSave,
   onChange,
   saving,
   data,
-}: HeaderFormProps) {
+}: ProgramFormProps) {
+  const subInitialHTML = data?.desc?.json
+    ? documentToHtmlString(data.desc.json)
+    : "";
+
+  const finalHTML = data?.descMobile?.json
+    ? documentToHtmlString(data.descMobile.json)
+    : "";
+
   const [imagePreview, setImagePreview] = useState<string | null>(
     data?.image?.url || null
   );
@@ -58,12 +66,15 @@ export default function HeaderForm({
   const { toast } = useToast();
 
   const form = useForm({
-    resolver: zodResolver(headerSchema),
+    resolver: zodResolver(ProgramSchema),
     defaultValues: {
       image: {
         url: data?.image?.url || "",
       },
-      title: data?.title || "",
+      desc: subInitialHTML,
+      mainTitle: data?.mainTitle || "",
+      welcomeText: data?.welcomeText || "",
+      descMobile: finalHTML,
     },
   });
 
@@ -125,8 +136,24 @@ export default function HeaderForm({
       entryId: data?.sys?.id,
     };
 
-    if (formData.title !== data?.title) {
-      changedFields.title = formData.title;
+    if (formData.mainTitle !== data?.mainTitle) {
+      changedFields.mainTitle = formData.mainTitle;
+    }
+
+    if (formData.welcomeText !== data?.welcomeText) {
+      changedFields.welcomeText = formData.welcomeText;
+    }
+
+    if (formData.descMobile !== finalHTML) {
+      // Convierte HTML a Rich Text JSON usando la nueva función
+      const richTextJSON = htmlToRichText(formData.descMobile);
+      changedFields.descMobile = richTextJSON;
+    }
+
+    if (formData.desc !== subInitialHTML) {
+      // Convierte HTML a Rich Text JSON usando la nueva función
+      const richTextJSON = htmlToRichText(formData.desc);
+      changedFields.desc = richTextJSON;
     }
 
     if (formData.image?.uploadId) {
@@ -153,10 +180,37 @@ export default function HeaderForm({
             <div className="space-y-6">
               <FormField
                 control={form.control}
+                name="welcomeText"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Titulo</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter title" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="mainTitle"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Titulo</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter title" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
                 name="image.url"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Profile Image</FormLabel>
+                    <FormLabel>Image</FormLabel>
                     {imagePreview && (
                       <div className="mt-2">
                         <img
@@ -198,12 +252,32 @@ export default function HeaderForm({
 
               <FormField
                 control={form.control}
-                name="title"
+                name="desc"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Enter title" />
+                      <RichTextEditor
+                        value={field.value} // HTML inicial del editor
+                        onChange={field.onChange} // Actualiza el formulario
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="descMobile"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Descripction Mobile</FormLabel>
+                    <FormControl>
+                      <RichTextEditor
+                        value={field.value} // HTML inicial del editor
+                        onChange={field.onChange} // Actualiza el formulario
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -214,12 +288,25 @@ export default function HeaderForm({
             <div className="space-y-4">
               <h3 className="font-semibold">Preview</h3>
               <div className="border rounded-lg p-4 bg-[#f6f7f4]">
-                <Header
-                  title={form.watch("title") || data?.title || ""}
+                <Autocuidarse
+                  mainTitle={form.watch("mainTitle") || data?.mainTitle || ""}
+                  welcomeText={
+                    form.watch("welcomeText") || data?.welcomeText || ""
+                  }
+                  desc={
+                    form.watch("desc")
+                      ? { json: htmlToRichText(form.watch("desc")) }
+                      : data?.desc
+                  }
+                  descMobile={
+                    form.watch("descMobile")
+                      ? { json: htmlToRichText(form.watch("descMobile")) }
+                      : data?.descMobile
+                  }
                   image={{
                     url: imagePreview || data?.image?.url || "",
                   }}
-                  __typename="Header"
+                  __typename="Program"
                 />
               </div>
             </div>

@@ -18,8 +18,13 @@ import { Loader2, Upload } from "lucide-react";
 import Header from "@/components/layout/Header";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import AboutPilar from "@/components/sections/AboutPilar";
+import dynamic from "next/dynamic";
+const RichTextEditor = dynamic(() => import("react-quill"), { ssr: false });
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { htmlToRichText } from "@/lib/htmlParser";
 
-const headerSchema = z.object({
+const aboutPilarSchema = z.object({
   image: z
     .object({
       url: z.string().url("Must be a valid URL").optional(),
@@ -28,29 +33,26 @@ const headerSchema = z.object({
     })
     .optional(),
   title: z.string().optional(),
+  biography: z.string().optional(),
 });
 
-type HeaderFormProps = {
+type AboutPilarFormProps = {
   onSave: (data: any) => void;
   onChange: () => void;
   saving: boolean;
-  data?: {
-    sys: {
-      id: string;
-    };
-    image?: {
-      url: string;
-    };
-    title?: string;
-  };
+  data?: any;
 };
 
-export default function HeaderForm({
+export default function AboutPilarForm({
   onSave,
   onChange,
   saving,
   data,
-}: HeaderFormProps) {
+}: AboutPilarFormProps) {
+  const subInitialHTML = data?.biography?.json
+    ? documentToHtmlString(data.biography.json)
+    : "";
+
   const [imagePreview, setImagePreview] = useState<string | null>(
     data?.image?.url || null
   );
@@ -58,12 +60,13 @@ export default function HeaderForm({
   const { toast } = useToast();
 
   const form = useForm({
-    resolver: zodResolver(headerSchema),
+    resolver: zodResolver(aboutPilarSchema),
     defaultValues: {
       image: {
         url: data?.image?.url || "",
       },
       title: data?.title || "",
+      biography: subInitialHTML,
     },
   });
 
@@ -129,6 +132,12 @@ export default function HeaderForm({
       changedFields.title = formData.title;
     }
 
+    if (formData.biography !== subInitialHTML) {
+      // Convierte HTML a Rich Text JSON usando la nueva función
+      const richTextJSON = htmlToRichText(formData.biography);
+      changedFields.biography = richTextJSON;
+    }
+
     if (formData.image?.uploadId) {
       changedFields.uploadId = formData.image.uploadId;
       changedFields.fileName = formData.image.fileName;
@@ -156,7 +165,7 @@ export default function HeaderForm({
                 name="image.url"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Profile Image</FormLabel>
+                    <FormLabel>Image</FormLabel>
                     {imagePreview && (
                       <div className="mt-2">
                         <img
@@ -209,17 +218,39 @@ export default function HeaderForm({
                   </FormItem>
                 )}
               />
+
+              <FormField
+                control={form.control}
+                name="biography"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Texto</FormLabel>
+                    <FormControl>
+                      <RichTextEditor
+                        value={field.value} // HTML inicial del editor
+                        onChange={field.onChange} // Actualiza el formulario
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
             <div className="space-y-4">
               <h3 className="font-semibold">Preview</h3>
               <div className="border rounded-lg p-4 bg-[#f6f7f4]">
-                <Header
+                <AboutPilar
                   title={form.watch("title") || data?.title || ""}
                   image={{
                     url: imagePreview || data?.image?.url || "",
                   }}
-                  __typename="Header"
+                  biography={
+                    form.watch("biography")
+                      ? { json: htmlToRichText(form.watch("biography")) }
+                      : data?.biography
+                  }
+                  __typename="AboutPilar"
                 />
               </div>
             </div>

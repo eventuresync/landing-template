@@ -2,10 +2,8 @@
 
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { signOut } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -25,12 +23,20 @@ import HeroForm from "@/components/admin/forms/HeroForm";
 import RealityForm from "@/components/admin/forms/RealityForm";
 import TestimonialsForm from "@/components/admin/forms/TestimonialsForm";
 import PricingForm from "@/components/admin/forms/PricingForm";
+import ProgramForm from "@/components/admin/forms/ProgramForm";
+import VideoTestimonialForm from "@/components/admin/forms/videoTestimonialForm";
+import CourseIncludesForm from "@/components/admin/forms/courseIncludesForm";
+import AboutPilarForm from "@/components/admin/forms/AboutPilarForm";
+import CallToActionForm from "@/components/admin/forms/CallToActionForm";
+
+import "react-quill/dist/quill.snow.css";
 
 // Define section types for type safety
 type Section = {
   id: string;
   label: string;
   description: string;
+  icon: string;
   component: React.ComponentType<any>;
 };
 
@@ -39,31 +45,78 @@ const sections: Section[] = [
     id: "header",
     label: "Header",
     description: "Main site header with profile image and subtitle",
+    icon: "👤",
     component: HeaderForm,
   },
   {
     id: "hero",
     label: "Hero Section",
     description: "Main hero section with title, subtitle and video",
+    icon: "🎯",
     component: HeroForm,
   },
   {
     id: "reality",
     label: "Reality Section",
     description: "Reality check section with points and final note",
+    icon: "✨",
     component: RealityForm,
   },
   {
     id: "testimonials",
     label: "Testimonials",
     description: "Customer testimonials and success stories",
+    icon: "💬",
     component: TestimonialsForm,
+  },
+  {
+    id: "program",
+    label: "Program",
+    description: "",
+    icon: "📚",
+    component: ProgramForm,
+  },
+  {
+    id: "videoTestimonial",
+    label: "Video Testimonial",
+    description: "",
+    icon: "📹",
+    component: VideoTestimonialForm,
+  },
+  {
+    id: "module",
+    label: "Module",
+    description: "",
+    icon: "📦",
+    component: () => <div />,
+  },
+  {
+    id: "courseIncludes",
+    label: "Course Includes",
+    description: "",
+    icon: "💻",
+    component: CourseIncludesForm,
+  },
+  {
+    id: "aboutPilar",
+    label: "About Pilar",
+    description: "",
+    icon: "👩‍🦳",
+    component: AboutPilarForm,
   },
   {
     id: "pricing",
     label: "Pricing",
     description: "Program pricing and payment options",
+    icon: "💰",
     component: PricingForm,
+  },
+  {
+    id: "callToAction",
+    label: "Call To Action",
+    description: "",
+    icon: "📞",
+    component: CallToActionForm,
   },
 ];
 
@@ -182,53 +235,52 @@ export default function AdminDashboard() {
             </Button>
           </div>
 
-          <Tabs
-            value={activeSection}
-            onValueChange={setActiveSection}
-            className="space-y-8"
-          >
-            <TabsList className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Sidebar with section navigation */}
+            <div className="space-y-4">
+              <h2 className="text-lg font-semibold mb-4">Page Sections</h2>
               {sections.map((section) => (
-                <TabsTrigger
+                <button
                   key={section.id}
-                  value={section.id}
-                  className="relative"
+                  onClick={() => setActiveSection(section.id)}
+                  className={`w-full text-left p-4 rounded-lg transition-all ${
+                    activeSection === section.id
+                      ? "bg-primary text-white"
+                      : "bg-white hover:bg-gray-50"
+                  } relative group`}
                 >
-                  {section.label}
-                  {unsavedChanges[section.id] && (
-                    <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full" />
-                  )}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            {sections.map((section) => {
-              console.log("section", section);
-              console.log(
-                "contentData?.[section.id]",
-                contentData?.[section.id]
-              );
-              return (
-                <TabsContent key={section.id} value={section.id}>
-                  <Card className="p-6">
-                    <div className="mb-6">
-                      <h2 className="text-2xl font-semibold mb-2">
-                        {section.label}
-                      </h2>
-                      <p className="text-gray-600">{section.description}</p>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-2xl">{section.icon}</span>
+                    <div>
+                      <p className="font-medium">{section.label}</p>
                     </div>
+                  </div>
+                  {unsavedChanges[section.id] && (
+                    <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full" />
+                  )}
+                </button>
+              ))}
+            </div>
 
-                    <section.component
-                      onSave={(data: any) => handleSave(section.id, data)}
-                      onChange={() => handleFormChange(section.id)}
-                      saving={saving}
-                      data={contentData?.[section.id]}
-                    />
-                  </Card>
-                </TabsContent>
-              );
-            })}
-          </Tabs>
+            {/* Main content area */}
+            <div className="md:col-span-3">
+              {sections.map((section) => {
+                const Component = section.component;
+                return (
+                  activeSection === section.id && (
+                    <div key={section.id}>
+                      <Component
+                        onSave={(data: any) => handleSave(section.id, data)}
+                        onChange={() => handleFormChange(section.id)}
+                        saving={saving}
+                        data={contentData?.[section.id.toLowerCase()]}
+                      />
+                    </div>
+                  )
+                );
+              })}
+            </div>
+          </div>
         </Card>
       </div>
     </div>
