@@ -7,6 +7,48 @@ const client = createClient({
   accessToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN!,
 });
 
+async function createAssetFromUpload(
+  environment: any,
+  uploadId: string,
+  fileName: string
+) {
+  try {
+    // Create the asset
+    const asset = await environment.createAsset({
+      fields: {
+        title: {
+          "en-US": `Header Image ${new Date().toISOString()}`,
+        },
+        description: {
+          "en-US": "Header profile image",
+        },
+        file: {
+          "en-US": {
+            contentType: "image/jpeg",
+            fileName: fileName,
+            uploadFrom: {
+              sys: {
+                type: "Link",
+                linkType: "Upload",
+                id: uploadId,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    // Process and publish the asset
+    const processedAsset = await asset.processForAllLocales();
+    const publishedAsset = await processedAsset.publish();
+
+    return publishedAsset.sys.id;
+  } catch (error) {
+    console.error("Error creating asset:", error);
+    throw error;
+  }
+}
+
 export async function PUT(
   request: Request,
   { params }: { params: { sectionId: string } }
@@ -18,7 +60,7 @@ export async function PUT(
     }
 
     const data = await request.json();
-    const { entryId } = data; // Extraer el ID de entrada del payload
+    const { entryId, uploadId, fileName } = data;
 
     if (!entryId) {
       return NextResponse.json(
@@ -29,14 +71,40 @@ export async function PUT(
 
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE_ID!);
     const environment = await space.getEnvironment("master");
-
-    // Get the entry
     const entry = await environment.getEntry(entryId);
 
-    // Only update fields that are provided in the request
+    // Handle image update if upload ID is provided
+    if (uploadId && fileName) {
+      try {
+        const assetId = await createAssetFromUpload(
+          environment,
+          uploadId,
+          fileName
+        );
+        entry.fields.image = {
+          "en-US": {
+            sys: {
+              type: "Link",
+              linkType: "Asset",
+              id: assetId,
+            },
+          },
+        };
+      } catch (error) {
+        console.error("Error handling image:", error);
+        return NextResponse.json(
+          { error: "Failed to process image" },
+          { status: 500 }
+        );
+      }
+    }
+
+    // Update other fields
     Object.keys(data).forEach((key) => {
-      console.log(data[key], entryId);
-      if (data[key] !== undefined && data[key] !== entryId) {
+      if (
+        !["image", "entryId", "uploadId", "fileName"].includes(key) &&
+        data[key] !== undefined
+      ) {
         entry.fields[key] = {
           "en-US": data[key],
         };

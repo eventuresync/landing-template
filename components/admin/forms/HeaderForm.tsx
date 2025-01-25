@@ -14,14 +14,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Card } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
-import Image from "next/image";
+import { Loader2, Upload } from "lucide-react";
 import Header from "@/components/layout/Header";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const headerSchema = z.object({
   image: z
     .object({
       url: z.string().url("Must be a valid URL").optional(),
+      uploadId: z.string().optional(),
+      fileName: z.string().optional(),
     })
     .optional(),
   title: z.string().optional(),
@@ -48,6 +51,12 @@ export default function HeaderForm({
   saving,
   data,
 }: HeaderFormProps) {
+  const [imagePreview, setImagePreview] = useState<string | null>(
+    data?.image?.url || null
+  );
+  const [uploading, setUploading] = useState(false);
+  const { toast } = useToast();
+
   const form = useForm({
     resolver: zodResolver(headerSchema),
     defaultValues: {
@@ -58,26 +67,71 @@ export default function HeaderForm({
     },
   });
 
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Create a preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+
+    try {
+      setUploading(true);
+
+      // Upload the file
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload image");
+      }
+
+      const { uploadId } = await response.json();
+
+      // Update form with upload ID and filename
+      form.setValue("image", {
+        uploadId,
+        fileName: file.name,
+      });
+
+      onChange();
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      toast({
+        title: "Error",
+        description: "Failed to upload image. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleSubmit = (formData: any) => {
-    // Objeto para almacenar solo los campos modificados
     const changedFields: any = {
-      entryId: data?.sys?.id, // Incluir el ID de entrada en el payload
+      entryId: data?.sys?.id,
     };
 
-    // Comparar cada campo con los valores originales
     if (formData.title !== data?.title) {
       changedFields.title = formData.title;
     }
 
-    if (formData.image?.url !== data?.image?.url) {
-      changedFields.image = { url: formData.image.url };
+    if (formData.image?.uploadId) {
+      changedFields.uploadId = formData.image.uploadId;
+      changedFields.fileName = formData.image.fileName;
     }
 
-    // Solo enviar si hay cambios
     if (Object.keys(changedFields).length > 0) {
       onSave(changedFields);
     } else {
-      // Si no hay cambios, mostrar un mensaje o manejar según necesites
       console.log("No hay cambios para guardar");
     }
   };
@@ -97,20 +151,42 @@ export default function HeaderForm({
                 name="image.url"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Profile Image URL</FormLabel>
+                    <FormLabel>Profile Image</FormLabel>
+                    {imagePreview && (
+                      <div className="mt-2">
+                        <img
+                          src={imagePreview}
+                          alt="Preview"
+                          className="w-48"
+                        />
+                      </div>
+                    )}
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="url"
-                        placeholder="Enter image URL"
-                      />
+                      <div className="space-y-4">
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          className="hidden"
+                          id="image-upload"
+                          disabled={uploading}
+                        />
+                        <label
+                          htmlFor="image-upload"
+                          className={`flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-md cursor-pointer hover:bg-primary/90 w-fit ${
+                            uploading ? "opacity-50 cursor-not-allowed" : ""
+                          }`}
+                        >
+                          {uploading ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <Upload className="w-4 h-4" />
+                          )}
+                          {uploading ? "Uploading..." : "Upload Image"}
+                        </label>
+                      </div>
                     </FormControl>
                     <FormMessage />
-                    {data?.image?.url && (
-                      <p className="text-sm text-gray-500">
-                        Current value: {data.image.url}
-                      </p>
-                    )}
                   </FormItem>
                 )}
               />
@@ -125,11 +201,6 @@ export default function HeaderForm({
                       <Input {...field} placeholder="Enter title" />
                     </FormControl>
                     <FormMessage />
-                    {data?.title && (
-                      <p className="text-sm text-gray-500">
-                        Current value: {data.title}
-                      </p>
-                    )}
                   </FormItem>
                 )}
               />
@@ -138,24 +209,23 @@ export default function HeaderForm({
             <div className="space-y-4">
               <h3 className="font-semibold">Preview</h3>
               <div className="border rounded-lg p-4 bg-[#f6f7f4]">
-                <div className="flex flex-col items-center">
-                  {(form.watch("image.url") ||
-                    data?.image?.url ||
-                    form.watch("title") ||
-                    data?.title) && (
-                    <Header
-                      title={form.watch("title") || data?.title || ""}
-                      image={form.watch("image") || data?.image}
-                      __typename="Header"
-                    />
-                  )}
-                </div>
+                <Header
+                  title={form.watch("title") || data?.title || ""}
+                  image={{
+                    url: imagePreview || data?.image?.url || "",
+                  }}
+                  __typename="Header"
+                />
               </div>
             </div>
           </div>
 
           <div className="flex justify-end">
-            <Button className="text-white" type="submit" disabled={saving}>
+            <Button
+              className="text-white"
+              type="submit"
+              disabled={saving || uploading}
+            >
               {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Save Changes
             </Button>
