@@ -3,11 +3,6 @@
 import type { Header } from "@/lib/contentful/interface";
 import Image from "next/image";
 
-interface HeaderProps {
-  title: string;
-  image: {};
-}
-
 export default function Header({ title, image }: Header) {
   return (
     <div className="max-w-[960px] mx-auto mb-4">
