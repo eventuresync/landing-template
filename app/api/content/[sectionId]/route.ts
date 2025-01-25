@@ -18,17 +18,25 @@ export async function PUT(
     }
 
     const data = await request.json();
-    const { sectionId } = params;
+    const { entryId } = data; // Extraer el ID de entrada del payload
+
+    if (!entryId) {
+      return NextResponse.json(
+        { error: "Entry ID is required" },
+        { status: 400 }
+      );
+    }
 
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE_ID!);
     const environment = await space.getEnvironment("master");
 
     // Get the entry
-    const entry = await environment.getEntry(sectionId);
+    const entry = await environment.getEntry(entryId);
 
     // Only update fields that are provided in the request
     Object.keys(data).forEach((key) => {
-      if (data[key] !== undefined) {
+      console.log(data[key], entryId);
+      if (data[key] !== undefined && data[key] !== entryId) {
         entry.fields[key] = {
           "en-US": data[key],
         };

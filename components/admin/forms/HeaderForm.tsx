@@ -16,6 +16,7 @@ import {
 import { Card } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import Header from "@/components/layout/Header";
 
 const headerSchema = z.object({
   image: z
@@ -31,6 +32,9 @@ type HeaderFormProps = {
   onChange: () => void;
   saving: boolean;
   data?: {
+    sys: {
+      id: string;
+    };
     image?: {
       url: string;
     };
@@ -55,18 +59,27 @@ export default function HeaderForm({
   });
 
   const handleSubmit = (formData: any) => {
-    // Only include fields that have values
-    const updatedData: any = {};
+    // Objeto para almacenar solo los campos modificados
+    const changedFields: any = {
+      entryId: data?.sys?.id, // Incluir el ID de entrada en el payload
+    };
 
-    if (formData.image?.url) {
-      updatedData.image = { url: formData.image.url };
+    // Comparar cada campo con los valores originales
+    if (formData.title !== data?.title) {
+      changedFields.title = formData.title;
     }
 
-    if (formData.title) {
-      updatedData.title = formData.title;
+    if (formData.image?.url !== data?.image?.url) {
+      changedFields.image = { url: formData.image.url };
     }
 
-    onSave(updatedData);
+    // Solo enviar si hay cambios
+    if (Object.keys(changedFields).length > 0) {
+      onSave(changedFields);
+    } else {
+      // Si no hay cambios, mostrar un mensaje o manejar según necesites
+      console.log("No hay cambios para guardar");
+    }
   };
 
   return (
@@ -77,7 +90,7 @@ export default function HeaderForm({
           onChange={onChange}
           className="space-y-6"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6">
             <div className="space-y-6">
               <FormField
                 control={form.control}
@@ -124,21 +137,18 @@ export default function HeaderForm({
 
             <div className="space-y-4">
               <h3 className="font-semibold">Preview</h3>
-              <div className="border rounded-lg p-4">
+              <div className="border rounded-lg p-4 bg-[#f6f7f4]">
                 <div className="flex flex-col items-center">
-                  {(form.watch("image.url") || data?.image?.url) && (
-                    <div className="relative w-48 h-48 mb-4">
-                      <Image
-                        src={form.watch("image.url") || data?.image?.url || ""}
-                        fill
-                        className="rounded-full object-cover"
-                        alt={""}
-                      />
-                    </div>
+                  {(form.watch("image.url") ||
+                    data?.image?.url ||
+                    form.watch("title") ||
+                    data?.title) && (
+                    <Header
+                      title={form.watch("title") || data?.title || ""}
+                      image={form.watch("image") || data?.image}
+                      __typename="Header"
+                    />
                   )}
-                  <p className="text-center text-gray-600">
-                    {form.watch("title") || data?.title || ""}
-                  </p>
                 </div>
               </div>
             </div>
