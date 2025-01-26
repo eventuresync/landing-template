@@ -30,6 +30,7 @@ import AboutPilarForm from "@/components/admin/forms/AboutPilarForm";
 import CallToActionForm from "@/components/admin/forms/CallToActionForm";
 
 import "react-quill/dist/quill.snow.css";
+import { Toaster } from "@/components/ui/toaster";
 
 // Define section types for type safety
 type Section = {
@@ -150,7 +151,7 @@ export default function AdminDashboard() {
       } catch (error) {
         console.error("Error fetching content:", error);
         toast({
-          title: "Error",
+          title: "❌ Error",
           description: "Failed to load content. Please try again.",
           variant: "destructive",
         });
@@ -178,13 +179,13 @@ export default function AdminDashboard() {
 
       setUnsavedChanges((prev) => ({ ...prev, [sectionId]: false }));
       toast({
-        title: "Success",
+        title: "✅ Success",
         description: "Content updated successfully",
       });
     } catch (error) {
       console.error("Error saving content:", error);
       toast({
-        title: "Error",
+        title: "❌ Error",
         description: "Failed to save changes. Please try again.",
         variant: "destructive",
       });
@@ -207,82 +208,85 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <Card className="p-8">
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-              <Breadcrumb className="mt-2">
-                <BreadcrumbList>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="/admin">Dashboard</BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>
-                      {sections.find((s) => s.id === activeSection)?.label}
-                    </BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
-            </div>
-            <Button
-              className="text-white"
-              onClick={() => signOut({ callbackUrl: "/auth/login" })}
-            >
-              Sign Out
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Sidebar with section navigation */}
-            <div className="space-y-4">
-              <h2 className="text-lg font-semibold mb-4">Page Sections</h2>
-              {sections.map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => setActiveSection(section.id)}
-                  className={`w-full text-left p-4 rounded-lg transition-all ${
-                    activeSection === section.id
-                      ? "bg-primary text-white"
-                      : "bg-white hover:bg-gray-50"
-                  } relative group`}
-                >
-                  <div className="flex items-center space-x-3">
-                    <span className="text-2xl">{section.icon}</span>
-                    <div>
-                      <p className="font-medium">{section.label}</p>
-                    </div>
-                  </div>
-                  {unsavedChanges[section.id] && (
-                    <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full" />
-                  )}
-                </button>
-              ))}
+    <>
+      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <Card className="p-8">
+            <div className="flex justify-between items-center mb-8">
+              <div>
+                <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+                <Breadcrumb className="mt-2">
+                  <BreadcrumbList>
+                    <BreadcrumbItem>
+                      <BreadcrumbLink href="/admin">Dashboard</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                      <BreadcrumbPage>
+                        {sections.find((s) => s.id === activeSection)?.label}
+                      </BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </BreadcrumbList>
+                </Breadcrumb>
+              </div>
+              <Button
+                className="text-white"
+                onClick={() => signOut({ callbackUrl: "/auth/login" })}
+              >
+                Sign Out
+              </Button>
             </div>
 
-            {/* Main content area */}
-            <div className="md:col-span-3">
-              {sections.map((section) => {
-                const Component = section.component;
-                return (
-                  activeSection === section.id && (
-                    <div key={section.id}>
-                      <Component
-                        onSave={(data: any) => handleSave(section.id, data)}
-                        onChange={() => handleFormChange(section.id)}
-                        saving={saving}
-                        data={contentData?.[section.id.toLowerCase()]}
-                      />
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              {/* Sidebar with section navigation */}
+              <div className="space-y-4">
+                <h2 className="text-lg font-semibold mb-4">Page Sections</h2>
+                {sections.map((section) => (
+                  <button
+                    key={section.id}
+                    onClick={() => setActiveSection(section.id)}
+                    className={`w-full text-left p-4 rounded-lg transition-all ${
+                      activeSection === section.id
+                        ? "bg-primary text-white"
+                        : "bg-white hover:bg-gray-50"
+                    } relative group`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className="text-2xl">{section.icon}</span>
+                      <div>
+                        <p className="font-medium">{section.label}</p>
+                      </div>
                     </div>
-                  )
-                );
-              })}
+                    {unsavedChanges[section.id] && (
+                      <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full" />
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              {/* Main content area */}
+              <div className="md:col-span-3">
+                {sections.map((section) => {
+                  const Component = section.component;
+                  return (
+                    activeSection === section.id && (
+                      <div key={section.id}>
+                        <Component
+                          onSave={(data: any) => handleSave(section.id, data)}
+                          onChange={() => handleFormChange(section.id)}
+                          saving={saving}
+                          data={contentData?.[section.id.toLowerCase()]}
+                        />
+                      </div>
+                    )
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </div>
       </div>
-    </div>
+      <Toaster />
+    </>
   );
 }

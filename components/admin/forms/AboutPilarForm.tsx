@@ -105,7 +105,7 @@ export default function AboutPilarForm({
         fileName: file.name,
       } as any);
       toast({
-        title: "Success",
+        title: "✅ Success",
         description: "Imágen subida correctamente",
         variant: "default",
       });
