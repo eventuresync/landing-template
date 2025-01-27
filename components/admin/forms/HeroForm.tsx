@@ -27,6 +27,7 @@ const heroSchema = z.object({
   subtitle: z.string().optional(),
   buttonText: z.string().optional(),
   videoId: z.string().optional(),
+  titleResponsive: z.any().optional(),
 });
 
 type HeroFormProps = {
@@ -51,6 +52,8 @@ export default function HeroForm({ data, onSave, saving }: HeroFormProps) {
     },
   });
 
+  console.log(subInitialHTML, "subInitialHTML");
+
   const handleSubmit = (formData: any) => {
     const changedFields: any = {
       entryId: data?.sys?.id,
@@ -71,7 +74,7 @@ export default function HeroForm({ data, onSave, saving }: HeroFormProps) {
     if (formData.videoId !== data?.videoId) {
       changedFields.videoId = formData.videoId;
     }
-
+    console.log(formData, "formData.titleResponsive");
     if (formData.titleResponsive !== subInitialHTML) {
       // Convierte HTML a Rich Text JSON usando la nueva función
       const richTextJSON = htmlToRichText(formData.titleResponsive);
@@ -152,7 +155,7 @@ export default function HeroForm({ data, onSave, saving }: HeroFormProps) {
                 name="titleResponsive"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Subtitle</FormLabel>
+                    <FormLabel>Title Responsive</FormLabel>
                     <FormControl>
                       <RichTextEditor
                         value={field.value} // HTML inicial del editor
