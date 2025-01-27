@@ -1,11 +1,10 @@
 "use client";
 
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
@@ -15,76 +14,114 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Card } from "@/components/ui/card";
-import { Loader2, Plus, Trash2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import Pricing from "@/components/sections/Pricing";
+import dynamic from "next/dynamic";
+const RichTextEditor = dynamic(() => import("react-quill"), { ssr: false });
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { htmlToRichText } from "@/lib/htmlParser";
 
 const pricingSchema = z.object({
+  title: z.string().min(1, "Title is required"),
   plans: z.array(
     z.object({
-      name: z.string().min(1, "Name is required"),
+      title: z.string().min(1, "Title is required"),
       price: z.string().min(1, "Price is required"),
-      description: z.string().min(1, "Description is required"),
-      features: z.array(z.string().min(1, "Feature cannot be empty")),
-      ctaText: z.string().min(1, "CTA text is required"),
+      paymentType: z.string().min(1, "Payment type is required"),
+      features: z.any(),
+      buttonText: z.string().min(1, "Button text is required"),
+      buttonLink: z.string().min(1, "Button link is required"),
+      sys: z
+        .object({
+          id: z.string(),
+        })
+        .optional(),
     })
   ),
 });
-
-type PricingFormProps = {
-  data: any;
-  onSave: (data: any) => void;
-  saving: boolean;
-};
 
 export default function PricingForm({
   data,
   onSave,
   saving,
-}: PricingFormProps) {
+}: {
+  data: any;
+  onSave: (data: any) => void;
+  saving: boolean;
+}) {
   const form = useForm({
     resolver: zodResolver(pricingSchema),
     defaultValues: {
-      plans: data?.plans || [
-        {
-          name: "",
-          price: "",
-          description: "",
-          features: [""],
-          ctaText: "",
-        },
-      ],
+      title: data?.title || "",
+      plans:
+        data?.plansCollection?.items.map((plan: any) => ({
+          ...plan,
+          features: documentToHtmlString(plan.features?.json),
+        })) || [],
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
-    name: "plans",
-  });
+  const handleSubmit = (formData: any) => {
+    interface Plan {
+      title: string;
+      price: string;
+      paymentType: string;
+      features: any;
+      buttonText: string;
+      buttonLink: string;
+      sys?: {
+        id: string;
+      };
+    }
+
+    interface ChangedFields {
+      entryId: string | undefined;
+      title: string;
+      plans: Plan[];
+    }
+
+    const changedFields: ChangedFields = {
+      entryId: data?.sys?.id,
+      title: formData.title,
+      plans: formData.plans.map((plan: Plan) => ({
+        ...plan,
+        features: htmlToRichText(plan.features),
+      })),
+    };
+
+    onSave(changedFields);
+  };
 
   return (
     <Card className="p-6">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSave)} className="space-y-6">
-          <div className="space-y-6">
-            {fields.map((field, index) => (
-              <Card key={field.id} className="p-4">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold">Plan {index + 1}</h3>
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="icon"
-                    onClick={() => remove(index)}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Section Title</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="space-y-8">
+            {form.watch("plans").map((_: any, index: number) => (
+              <Card key={index} className="p-6">
+                <h3 className="text-lg font-semibold mb-4">Plan {index + 1}</h3>
 
                 <div className="space-y-4">
                   <FormField
                     control={form.control}
-                    name={`plans.${index}.name`}
-                    render={({ field }) => (
+                    name={`plans.${index}.title`}
+                    render={({ field }: { field: any }) => (
                       <FormItem>
-                        <FormLabel>Plan Name</FormLabel>
+                        <FormLabel>Plan Title</FormLabel>
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
@@ -96,7 +133,7 @@ export default function PricingForm({
                   <FormField
                     control={form.control}
                     name={`plans.${index}.price`}
-                    render={({ field }) => (
+                    render={({ field }: { field: any }) => (
                       <FormItem>
                         <FormLabel>Price</FormLabel>
                         <FormControl>
@@ -109,79 +146,55 @@ export default function PricingForm({
 
                   <FormField
                     control={form.control}
-                    name={`plans.${index}.description`}
-                    render={({ field }) => (
+                    name={`plans.${index}.paymentType`}
+                    render={({ field }: { field: any }) => (
                       <FormItem>
-                        <FormLabel>Description</FormLabel>
+                        <FormLabel>Payment Type</FormLabel>
                         <FormControl>
-                          <Textarea {...field} />
+                          <Input {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
 
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Features</label>
-                    {form
-                      .watch(`plans.${index}.features`)
-                      .map((_: string, featureIndex: number) => (
-                        <div key={featureIndex} className="flex gap-2">
-                          <FormField
-                            control={form.control}
-                            name={`plans.${index}.features.${featureIndex}`}
-                            render={({ field }) => (
-                              <FormItem className="flex-1">
-                                <FormControl>
-                                  <Input {...field} />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
+                  <FormField
+                    control={form.control}
+                    name={`plans.${index}.features`}
+                    render={({ field }: { field: any }) => (
+                      <FormItem>
+                        <FormLabel>Features</FormLabel>
+                        <FormControl>
+                          <RichTextEditor
+                            value={field.value}
+                            onChange={field.onChange}
                           />
-                          <Button
-                            type="button"
-                            variant="destructive"
-                            size="icon"
-                            onClick={() => {
-                              const features: string[] = form.getValues(
-                                `plans.${index}.features`
-                              );
-                              form.setValue(
-                                `plans.${index}.features`,
-                                features.filter((_, i) => i !== featureIndex)
-                              );
-                            }}
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      ))}
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => {
-                        const features = form.getValues(
-                          `plans.${index}.features`
-                        );
-                        form.setValue(`plans.${index}.features`, [
-                          ...features,
-                          "",
-                        ]);
-                      }}
-                      className="w-full"
-                    >
-                      <Plus className="h-4 w-4 mr-2" />
-                      Add Feature
-                    </Button>
-                  </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
                   <FormField
                     control={form.control}
-                    name={`plans.${index}.ctaText`}
-                    render={({ field }) => (
+                    name={`plans.${index}.buttonText`}
+                    render={({ field }: { field: any }) => (
                       <FormItem>
-                        <FormLabel>CTA Text</FormLabel>
+                        <FormLabel>Button Text</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name={`plans.${index}.buttonLink`}
+                    render={({ field }: { field: any }) => (
+                      <FormItem>
+                        <FormLabel>Button Link</FormLabel>
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
@@ -194,28 +207,40 @@ export default function PricingForm({
             ))}
           </div>
 
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() =>
-              append({
-                name: "",
-                price: "",
-                description: "",
-                features: [""],
-                ctaText: "",
-              })
-            }
-            className="w-full"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Add Plan
-          </Button>
+          <div className="space-y-4">
+            <h3 className="font-semibold">Preview</h3>
+            <div className="border rounded-lg p-4 bg-[#f6f7f4]">
+              <Pricing
+                title={form.watch("title") as string}
+                plansCollection={{
+                  items: form.watch("plans").map(
+                    (plan: {
+                      title: string;
+                      price: string;
+                      paymentType: string;
+                      features: any;
+                      buttonText: string;
+                      buttonLink: string;
+                      sys?: {
+                        id: string;
+                      };
+                    }) => ({
+                      ...plan,
+                      features: { json: htmlToRichText(plan.features) },
+                    })
+                  ),
+                }}
+                __typename="Pricing"
+              />
+            </div>
+          </div>
 
-          <Button type="submit" disabled={saving}>
-            {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Save Changes
-          </Button>
+          <div className="flex justify-end">
+            <Button className="text-white" type="submit" disabled={saving}>
+              {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Save Changes
+            </Button>
+          </div>
         </form>
       </Form>
     </Card>

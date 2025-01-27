@@ -40,22 +40,16 @@ import { CSS } from "@dnd-kit/utilities";
 const RichTextEditor = dynamic(() => import("react-quill"), { ssr: false });
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { htmlToRichText } from "@/lib/htmlParser";
+import StudentResults from "@/components/sections/StudentResults";
 
 const testimonialsSchema = z.object({
-  title: z.string().optional(),
-  sub: z.any().optional(),
-  subtitleResponsive: z.any().optional(),
-  finalText: z.string().optional(),
+  entry: z.string().optional(),
+  textTitle: z.any().optional(),
   testimonialImages: z.array(
     z.object({
       url: z.string().url("Must be a valid URL").optional(),
       uploadId: z.string().optional(),
       fileName: z.string().optional(),
-      sys: z
-        .object({
-          id: z.string(),
-        })
-        .optional(),
     })
   ),
 });
@@ -102,7 +96,7 @@ function SortableImage({ id, url, onRemove }: SortableImageProps) {
   );
 }
 
-export default function TestimonialsForm({
+export default function StudentResultsForm({
   data,
   onSave,
   onChange,
@@ -113,14 +107,10 @@ export default function TestimonialsForm({
   onChange: () => void;
   saving: boolean;
 }) {
-  const subInitialHTML = data?.sub?.json
-    ? documentToHtmlString(data.sub.json)
-    : "";
-  const subtitleResponsiveInitialHTML = data?.subtitleResponsive?.json
-    ? documentToHtmlString(data.subtitleResponsive.json)
+  const textTitleInitialHTML = data?.textTitle?.json
+    ? documentToHtmlString(data.textTitle.json)
     : "";
 
-  // Inicializar con las imágenes existentes
   const [imagePreviews, setImagePreviews] = useState<
     Array<{ id: string; url: string; isExisting?: boolean }>
   >(
@@ -143,10 +133,8 @@ export default function TestimonialsForm({
   const form = useForm({
     resolver: zodResolver(testimonialsSchema),
     defaultValues: {
-      title: data?.title || "",
-      sub: subInitialHTML,
-      subtitleResponsive: subtitleResponsiveInitialHTML,
-      finalText: data?.finalText || "",
+      entry: data?.entry || "",
+      textTitle: textTitleInitialHTML,
       testimonialImages: data?.testimonialImagesCollection?.items || [],
     },
   });
@@ -252,34 +240,25 @@ export default function TestimonialsForm({
     setImagePreviews((prev) => prev.filter((img) => img.id !== idToRemove));
 
     const currentImages = form.getValues("testimonialImages");
-    const newImages = currentImages.filter(
-      (_: any, index: number) => index !== imageIndex
-    );
+    const newImages: Array<{
+      uploadId: string;
+      fileName: string;
+      isExisting?: boolean;
+    }> = currentImages.filter((_: any, index: number) => index !== imageIndex);
     form.setValue("testimonialImages", newImages);
     onChange();
   };
-
   const handleSubmit = (formData: any) => {
     const changedFields: any = {
       entryId: data?.sys?.id,
     };
 
-    if (formData.title !== data?.title) {
-      changedFields.title = formData.title;
+    if (formData.entry !== data?.entry) {
+      changedFields.entry = htmlToRichText(formData.entry);
     }
 
-    if (formData.sub !== subInitialHTML) {
-      changedFields.sub = htmlToRichText(formData.sub);
-    }
-
-    if (formData.subtitleResponsive !== subtitleResponsiveInitialHTML) {
-      changedFields.subtitleResponsive = htmlToRichText(
-        formData.subtitleResponsive
-      );
-    }
-
-    if (formData.finalText !== data?.finalText) {
-      changedFields.finalText = formData.finalText;
+    if (formData.textTitle !== textTitleInitialHTML) {
+      changedFields.textTitle = htmlToRichText(formData.textTitle);
     }
 
     // Preparar el array de imágenes combinando existentes y nuevas
@@ -303,6 +282,7 @@ export default function TestimonialsForm({
       onSave(changedFields);
     }
   };
+
   return (
     <Card className="p-6">
       <Form {...form}>
@@ -315,60 +295,29 @@ export default function TestimonialsForm({
             <div className="space-y-6">
               <FormField
                 control={form.control}
-                name="title"
+                name="entry"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title Responsive</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="textTitle"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="sub"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Subtitle</FormLabel>
-                    <FormControl>
                       <RichTextEditor
                         value={field.value}
                         onChange={field.onChange}
                       />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="subtitleResponsive"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Responsive Subtitle</FormLabel>
-                    <FormControl>
-                      <RichTextEditor
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="finalText"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Final Text</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -383,7 +332,7 @@ export default function TestimonialsForm({
                   onDragEnd={handleDragEnd}
                 >
                   <SortableContext
-                    items={imagePreviews.map((img) => img.id)}
+                    items={imagePreviews}
                     strategy={verticalListSortingStrategy}
                   >
                     <div className="grid grid-cols-2 gap-4 mt-2">
@@ -429,27 +378,19 @@ export default function TestimonialsForm({
             <div className="space-y-4">
               <h3 className="font-semibold">Preview</h3>
               <div className="border rounded-lg p-4 bg-[#f6f7f4]">
-                <Testimonials
-                  title={form.watch("title") || data?.title}
-                  sub={
-                    form.watch("sub")
-                      ? { json: htmlToRichText(form.watch("sub")) }
-                      : data?.sub
-                  }
-                  subtitleResponsive={
-                    form.watch("subtitleResponsive")
+                <StudentResults
+                  entry={form.watch("entry") || data?.entry}
+                  textTitle={
+                    form.watch("textTitle")
                       ? {
-                          json: htmlToRichText(
-                            form.watch("subtitleResponsive")
-                          ),
+                          json: htmlToRichText(form.watch("textTitle")),
                         }
-                      : data?.subtitleResponsive
+                      : data?.textTitle
                   }
-                  finalText={form.watch("finalText") || data?.finalText}
                   testimonialImagesCollection={{
                     items: imagePreviews.map((img) => ({ url: img.url })),
                   }}
-                  __typename="Testimonials"
+                  __typename="StudentResults"
                 />
               </div>
             </div>

@@ -1,17 +1,25 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { Award, Users, TrendingUp } from "lucide-react";
-import Image from "next/image";
+import type { AboutPilar } from "@/lib/contentful/interface";
+import { BLOCKS } from "@contentful/rich-text-types";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-export default function AboutPilar() {
+export default function AboutPilar({ biography, image, title }: AboutPilar) {
+  const richTextOptions = {
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => (
+        <p className="text-[#444] text-lg sm:text-base mb-4">{children}</p>
+      ),
+    },
+  };
+
   return (
     <section className="pt-20 pb-10 relative max-w-[720px] mx-auto">
       <div className="mx-auto px-4">
         <div className="flex flex-col gap-12 items-center max-w-3xl sm:max-w-6xl mx-auto">
           <div className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]">
             <img
-              src="/pilar.jpg"
+              src={image.url}
               alt="Pilar Benitez"
               className="rounded-2xl w-full h-full object-cover"
             />
@@ -19,9 +27,10 @@ export default function AboutPilar() {
           <div className="space-y-8">
             <div className="flex flex-col text-left">
               <div className="text-[1.5rem] sm:text-[2rem] leading-tight font-black mb-6 text-center">
-                ¿Quién soy yo? Te cuento mi historia…
+                {title}
               </div>
-              <p className="text-[#444] text-lg sm:text-base mb-4">
+              {documentToReactComponents(biography.json, richTextOptions)}
+              {/* <p className="text-[#444] text-lg sm:text-base mb-4">
                 ¡Hola! Soy Pilar, una ex-perfeccionista recuperada y orgullosa
                 mujer de 50+ años. Mi vida cambió por completo a los 36, cuando
                 trabajaba como ejecutiva en el mundo de la moda. Fue entonces
@@ -70,7 +79,7 @@ export default function AboutPilar() {
               <p className="text-[#444] text-lg sm:text-base mb-4">
                 Esa etapa me enseñó que cada elección que hacemos, cada bocado
                 que tomamos, es un voto por el cuerpo que tendremos mañana.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

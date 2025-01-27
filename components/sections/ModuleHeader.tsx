@@ -3,14 +3,12 @@ import { Card } from "@/components/ui/card";
 interface ModuleHeaderProps {
   icon: string;
   title: string;
-  subtitle?: string;
   description: string;
 }
 
 export default function ModuleHeader({
   icon,
   title,
-  subtitle,
   description,
 }: ModuleHeaderProps) {
   return (

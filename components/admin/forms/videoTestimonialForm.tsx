@@ -16,38 +16,32 @@ import {
 } from "@/components/ui/form";
 import { Card } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
-import Hero from "@/components/sections/Hero";
-import dynamic from "next/dynamic";
-const RichTextEditor = dynamic(() => import("react-quill"), { ssr: false });
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { htmlToRichText } from "@/lib/htmlParser";
+import VideoTestimonial from "@/components/sections/videoTestimonial";
 
 const heroSchema = z.object({
-  mainTitle: z.string().optional(),
+  title: z.string().optional(),
   subtitle: z.string().optional(),
-  buttonText: z.string().optional(),
-  videoId: z.string().optional(),
+  videoUrl: z.string().optional(),
 });
 
-type HeroFormProps = {
+type VideoTestimonialFormProps = {
   data: any;
   onSave: (data: any) => void;
   saving: boolean;
 };
 
-export default function HeroForm({ data, onSave, saving }: HeroFormProps) {
-  const subInitialHTML = data?.titleResponsive?.json
-    ? documentToHtmlString(data.titleResponsive.json)
-    : "";
-
+export default function VideoTestimonialForm({
+  data,
+  onSave,
+  saving,
+}: VideoTestimonialFormProps) {
+  console.log("data", data);
   const form = useForm({
     resolver: zodResolver(heroSchema),
     defaultValues: {
-      mainTitle: data?.mainTitle || "",
+      title: data?.title || "",
       subtitle: data?.subtitle || "",
-      buttonText: data?.buttonText || "",
-      videoId: data?.videoId || "",
-      titleResponsive: subInitialHTML,
+      videoUrl: data?.videoUrl || "",
     },
   });
 
@@ -56,26 +50,16 @@ export default function HeroForm({ data, onSave, saving }: HeroFormProps) {
       entryId: data?.sys?.id,
     };
 
-    if (formData.mainTitle !== data?.mainTitle) {
-      changedFields.mainTitle = formData.mainTitle;
+    if (formData.title !== data?.title) {
+      changedFields.title = formData.title;
     }
 
     if (formData.subtitle !== data?.subtitle) {
       changedFields.subtitle = formData.subtitle;
     }
 
-    if (formData.buttonText !== data?.buttonText) {
-      changedFields.buttonText = formData.buttonText;
-    }
-
-    if (formData.videoId !== data?.videoId) {
-      changedFields.videoId = formData.videoId;
-    }
-
-    if (formData.titleResponsive !== subInitialHTML) {
-      // Convierte HTML a Rich Text JSON usando la nueva función
-      const richTextJSON = htmlToRichText(formData.titleResponsive);
-      changedFields.titleResponsive = richTextJSON;
+    if (formData.videoUrl !== data?.videoUrl) {
+      changedFields.videoUrl = formData.videoUrl;
     }
 
     if (Object.keys(changedFields).length > 0) {
@@ -93,7 +77,7 @@ export default function HeroForm({ data, onSave, saving }: HeroFormProps) {
             <div className="space-y-6">
               <FormField
                 control={form.control}
-                name="mainTitle"
+                name="title"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Title</FormLabel>
@@ -121,43 +105,12 @@ export default function HeroForm({ data, onSave, saving }: HeroFormProps) {
 
               <FormField
                 control={form.control}
-                name="buttonText"
+                name="videoUrl"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>CTA Text</FormLabel>
+                    <FormLabel>Video URL</FormLabel>
                     <FormControl>
                       <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="videoId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Video ID</FormLabel>
-                    <FormControl>
-                      <Textarea {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="titleResponsive"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Subtitle</FormLabel>
-                    <FormControl>
-                      <RichTextEditor
-                        value={field.value} // HTML inicial del editor
-                        onChange={field.onChange} // Actualiza el formulario
-                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -167,17 +120,11 @@ export default function HeroForm({ data, onSave, saving }: HeroFormProps) {
             <div className="space-y-4">
               <h3 className="font-semibold">Preview</h3>
               <div className="border rounded-lg p-4 bg-[#f6f7f4]">
-                <Hero
-                  buttonText={form.watch("buttonText") || data?.buttonText}
-                  mainTitle={form.watch("mainTitle") || data?.mainTitle}
+                <VideoTestimonial
+                  title={form.watch("title") || data?.title}
                   subtitle={form.watch("subtitle") || data?.subtitle}
-                  titleResponsive={
-                    form.watch("titleResponsive")
-                      ? { json: htmlToRichText(form.watch("titleResponsive")) }
-                      : data?.sub
-                  }
-                  videoId={form.watch("videoId") || data?.videoId}
-                  __typename="Hero"
+                  videoUrl={form.watch("videoUrl") || data?.videoUrl}
+                  __typename="VideoTestimonial"
                 />
               </div>
             </div>
