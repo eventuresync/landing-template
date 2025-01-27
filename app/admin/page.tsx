@@ -33,6 +33,7 @@ import ModuleForm from "@/components/admin/forms/ModuleForm";
 import "react-quill/dist/quill.snow.css";
 import { Toaster } from "@/components/ui/toaster";
 import StudentResultsForm from "@/components/admin/forms/StudentResultsForm";
+import FAQForm from "@/components/admin/forms/FAQForm";
 
 // Define section types for type safety
 type Section = {
@@ -120,6 +121,13 @@ const sections: Section[] = [
     description: "",
     icon: "📈",
     component: StudentResultsForm,
+  },
+  {
+    id: "faq",
+    label: "FAQ",
+    description: "Frequently Asked Questions section",
+    icon: "❓",
+    component: FAQForm,
   },
   {
     id: "callToAction",
