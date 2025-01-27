@@ -111,8 +111,14 @@ export default function StudentResultsForm({
     ? documentToHtmlString(data.textTitle.json)
     : "";
 
-  const [imagePreviews, setImagePreviews] = useState<string[]>(
-    data?.testimonialImagesCollection?.items?.map((item: any) => item.url) || []
+  const [imagePreviews, setImagePreviews] = useState<
+    Array<{ id: string; url: string; isExisting?: boolean }>
+  >(
+    data?.testimonialImagesCollection?.items?.map((item: any) => ({
+      id: item.sys?.id || Math.random().toString(),
+      url: item.url,
+      isExisting: true,
+    })) || []
   );
   const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
@@ -137,8 +143,8 @@ export default function StudentResultsForm({
     const { active, over } = event;
 
     if (active.id !== over?.id) {
-      const oldIndex = imagePreviews.findIndex((url) => url === active.id);
-      const newIndex = imagePreviews.findIndex((url) => url === over?.id);
+      const oldIndex = imagePreviews.findIndex((img) => img.id === active.id);
+      const newIndex = imagePreviews.findIndex((img) => img.id === over?.id);
 
       setImagePreviews(arrayMove(imagePreviews, oldIndex, newIndex));
 
@@ -189,19 +195,24 @@ export default function StudentResultsForm({
 
       const results = await Promise.all(uploadPromises);
 
-      setImagePreviews((prev) => [
-        ...prev,
-        ...(results as any[]).map((r) => r.preview as string),
-      ]);
+      // Agregar nuevas imágenes manteniendo las existentes
+      const newPreviews = (results as any[]).map((r) => ({
+        id: r.uploadId,
+        url: r.preview as string,
+        isExisting: false,
+      }));
 
-      const currentImages = form.getValues("testimonialImages") || [];
-      form.setValue("testimonialImages", [
-        ...currentImages,
-        ...(results as any[]).map((r) => ({
-          uploadId: r.uploadId,
-          fileName: r.fileName,
-        })),
-      ]);
+      setImagePreviews((prev) => [...prev, ...newPreviews]);
+
+      // Actualizar el formulario manteniendo las imágenes existentes
+      const currentImages = form.getValues("testimonialImages");
+      const newImages = (results as any[]).map((r) => ({
+        uploadId: r.uploadId,
+        fileName: r.fileName,
+        isExisting: false,
+      }));
+
+      form.setValue("testimonialImages", [...currentImages, ...newImages]);
 
       toast({
         title: "Success",
@@ -222,18 +233,21 @@ export default function StudentResultsForm({
     }
   };
 
-  const removeImage = (urlToRemove: string) => {
-    const newPreviews = imagePreviews.filter((url) => url !== urlToRemove);
-    setImagePreviews(newPreviews);
+  const removeImage = (idToRemove: string) => {
+    const imageIndex = imagePreviews.findIndex((img) => img.id === idToRemove);
+    if (imageIndex === -1) return;
+
+    setImagePreviews((prev) => prev.filter((img) => img.id !== idToRemove));
 
     const currentImages = form.getValues("testimonialImages");
-    const newImages = currentImages.filter(
-      (_: any, index: number) => imagePreviews[index] !== urlToRemove
-    );
+    const newImages: Array<{
+      uploadId: string;
+      fileName: string;
+      isExisting?: boolean;
+    }> = currentImages.filter((_: any, index: number) => index !== imageIndex);
     form.setValue("testimonialImages", newImages);
     onChange();
   };
-
   const handleSubmit = (formData: any) => {
     const changedFields: any = {
       entryId: data?.sys?.id,
@@ -247,9 +261,22 @@ export default function StudentResultsForm({
       changedFields.textTitle = htmlToRichText(formData.textTitle);
     }
 
-    if (formData.testimonialImages.some((img: any) => img.uploadId)) {
-      changedFields.testimonialImages = formData.testimonialImages;
-    }
+    // Preparar el array de imágenes combinando existentes y nuevas
+    const existingImages =
+      data?.testimonialImagesCollection?.items?.map((item: any) => ({
+        uploadId: item.sys.id,
+        fileName: item.fileName,
+      })) || [];
+
+    const newImages = formData.testimonialImages
+      .filter((img: any) => !img.isExisting && img.uploadId)
+      .map((img: any) => ({
+        uploadId: img.uploadId,
+        fileName: img.fileName,
+      }));
+
+    // Combinar imágenes existentes y nuevas
+    changedFields.testimonialImages = [...existingImages, ...newImages];
 
     if (Object.keys(changedFields).length > 0) {
       onSave(changedFields);
@@ -309,11 +336,11 @@ export default function StudentResultsForm({
                     strategy={verticalListSortingStrategy}
                   >
                     <div className="grid grid-cols-2 gap-4 mt-2">
-                      {imagePreviews.map((url) => (
+                      {imagePreviews.map((img) => (
                         <SortableImage
-                          key={url}
-                          id={url}
-                          url={url}
+                          key={img.id}
+                          id={img.id}
+                          url={img.url}
                           onRemove={removeImage}
                         />
                       ))}
@@ -361,7 +388,7 @@ export default function StudentResultsForm({
                       : data?.textTitle
                   }
                   testimonialImagesCollection={{
-                    items: imagePreviews.map((url) => ({ url })),
+                    items: imagePreviews.map((img) => ({ url: img.url })),
                   }}
                   __typename="StudentResults"
                 />

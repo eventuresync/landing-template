@@ -2,6 +2,39 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 
+async function uploadToContentful(buffer: Buffer) {
+  const { CONTENTFUL_SPACE_ID, CONTENTFUL_MANAGEMENT_TOKEN } = process.env;
+
+  if (!CONTENTFUL_SPACE_ID || !CONTENTFUL_MANAGEMENT_TOKEN) {
+    throw new Error(
+      "Missing Contentful configuration in environment variables"
+    );
+  }
+
+  const response = await fetch(
+    `https://upload.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/uploads`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${CONTENTFUL_MANAGEMENT_TOKEN}`,
+        "Content-Type": "application/octet-stream",
+      },
+      body: buffer,
+    }
+  );
+
+  if (!response.ok) {
+    const errorDetails = await response.json();
+    throw new Error(
+      `Failed to upload to Contentful: ${
+        errorDetails.message || response.statusText
+      }`
+    );
+  }
+
+  return response.json();
+}
+
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -16,29 +49,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // Convert File to base64
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const base64 = buffer.toString("base64");
-
-    // Upload to Contentful
-    const response = await fetch(
-      `https://upload.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/uploads`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.CONTENTFUL_MANAGEMENT_TOKEN}`,
-          "Content-Type": "application/octet-stream",
-        },
-        body: buffer,
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to upload to Contentful");
+    if (!file.type.startsWith("image/")) {
+      return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
     }
 
-    const uploadData = await response.json();
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (file.size > maxSize) {
+      return NextResponse.json({ error: "File too large" }, { status: 400 });
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const uploadData = await uploadToContentful(buffer);
 
     return NextResponse.json({ uploadId: uploadData.sys.id });
   } catch (error: any) {

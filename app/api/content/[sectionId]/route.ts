@@ -17,10 +17,10 @@ async function createAssetFromUpload(
     const asset = await environment.createAsset({
       fields: {
         title: {
-          "en-US": `Header Image ${new Date().toISOString()}`,
+          "en-US": `Image ${new Date().toISOString()}`,
         },
         description: {
-          "en-US": "Header profile image",
+          "en-US": "Uploaded image",
         },
         file: {
           "en-US": {
@@ -42,7 +42,13 @@ async function createAssetFromUpload(
     const processedAsset = await asset.processForAllLocales();
     const publishedAsset = await processedAsset.publish();
 
-    return publishedAsset.sys.id;
+    return {
+      sys: {
+        type: "Link",
+        linkType: "Asset",
+        id: publishedAsset.sys.id,
+      },
+    };
   } catch (error) {
     console.error("Error creating asset:", error);
     throw error;
@@ -60,7 +66,7 @@ export async function PUT(
     }
 
     const data = await request.json();
-    const { entryId, uploadId, fileName } = data;
+    const { entryId } = data;
 
     if (!entryId) {
       return NextResponse.json(
@@ -73,22 +79,27 @@ export async function PUT(
     const environment = await space.getEnvironment("master");
     const entry = await environment.getEntry(entryId);
 
-    // Handle image update if upload ID is provided
-    if (uploadId && fileName) {
+    // Handle testimonial images if present
+    if (data.testimonialImages && Array.isArray(data.testimonialImages)) {
+      const assetPromises = data.testimonialImages.map((image: any) =>
+        createAssetFromUpload(environment, image.uploadId, image.fileName)
+      );
+
+      const assetRefs = await Promise.all(assetPromises);
+      entry.fields.testimonialImages = {
+        "en-US": assetRefs,
+      };
+    }
+    // Handle single image if present
+    else if (data.uploadId && data.fileName) {
       try {
-        const assetId = await createAssetFromUpload(
+        const assetRef = await createAssetFromUpload(
           environment,
-          uploadId,
-          fileName
+          data.uploadId,
+          data.fileName
         );
         entry.fields.image = {
-          "en-US": {
-            sys: {
-              type: "Link",
-              linkType: "Asset",
-              id: assetId,
-            },
-          },
+          "en-US": assetRef,
         };
       } catch (error) {
         console.error("Error handling image:", error);
@@ -102,7 +113,13 @@ export async function PUT(
     // Update other fields
     Object.keys(data).forEach((key) => {
       if (
-        !["image", "entryId", "uploadId", "fileName"].includes(key) &&
+        ![
+          "image",
+          "entryId",
+          "uploadId",
+          "fileName",
+          "testimonialImages",
+        ].includes(key) &&
         data[key] !== undefined
       ) {
         entry.fields[key] = {

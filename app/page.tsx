@@ -40,6 +40,11 @@ export default async function Home() {
     Module,
   };
 
+  // Encuentra la posición del primer `Module`
+  const firstModuleIndex = components.findIndex(
+    (component) => component.__typename === "Module"
+  );
+
   return (
     <main className="min-h-screen bg-[#f6f7f4] pb-8">
       {/* 
@@ -55,10 +60,17 @@ export default async function Home() {
 
         // Renderiza el componente con sus props
         return (
-          <Component
-            key={index}
-            {...component} // Asegúrate de que `props` contiene los datos dinámicos necesarios
-          />
+          <>
+            {index === firstModuleIndex && (
+              <p className="font-bold text-[1rem] sm:text-[1.5rem] leading-tight text-[#444] text-l py-4 text-center max-w-2xl mx-auto">
+                Lo que aprenderás en el curso…
+              </p>
+            )}
+            <Component
+              key={index}
+              {...component} // Asegúrate de que `props` contiene los datos dinámicos necesarios
+            />
+          </>
         );
       })}
     </main>

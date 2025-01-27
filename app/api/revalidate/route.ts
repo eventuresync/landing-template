@@ -1,17 +1,20 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.query.secret !== process.env.REVALIDATE_SECRET) {
-    return res.status(401).json({ message: "Invalid token" });
+export async function POST(request: Request) {
+  const data = await request.json();
+
+  if (data.secret !== process.env.REVALIDATE_SECRET) {
+    return NextResponse.json({ error: "Invalid token" }, { status: 401 });
   }
 
   try {
-    await res.revalidate("/"); // Revalida la página Home
-    return res.json({ revalidated: true });
+    revalidatePath("/"); // Revalida la página Home
+    return NextResponse.json({ revalidated: true });
   } catch (err) {
-    return res.status(500).json({ message: "Revalidation error" });
+    return NextResponse.json(
+      { message: "Revalidation error", error: err },
+      { status: 500 }
+    );
   }
 }

@@ -98,6 +98,10 @@ const landingPageQuery = gql`
     finalText
     testimonialImagesCollection(limit: 6) {
       items {
+        sys {
+          id
+        }
+        fileName
         url
       }
     }
@@ -192,6 +196,10 @@ const landingPageQuery = gql`
     entry
     testimonialImagesCollection(limit: 6) {
       items {
+        sys {
+          id
+        }
+        fileName
         url
       }
     }
