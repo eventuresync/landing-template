@@ -14,6 +14,8 @@ import Module from "@/components/sections/ModuleHeader";
 import { getLanding } from "@/lib/contentful";
 import { FC } from "react";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const getLandingData = await getLanding();
   const components =

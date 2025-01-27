@@ -40,12 +40,11 @@ import { CSS } from "@dnd-kit/utilities";
 const RichTextEditor = dynamic(() => import("react-quill"), { ssr: false });
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { htmlToRichText } from "@/lib/htmlParser";
+import StudentResults from "@/components/sections/StudentResults";
 
 const testimonialsSchema = z.object({
-  title: z.string().optional(),
-  sub: z.any().optional(),
-  subtitleResponsive: z.any().optional(),
-  finalText: z.string().optional(),
+  entry: z.string().optional(),
+  textTitle: z.any().optional(),
   testimonialImages: z.array(
     z.object({
       url: z.string().url("Must be a valid URL").optional(),
@@ -97,7 +96,7 @@ function SortableImage({ id, url, onRemove }: SortableImageProps) {
   );
 }
 
-export default function TestimonialsForm({
+export default function StudentResultsForm({
   data,
   onSave,
   onChange,
@@ -108,11 +107,8 @@ export default function TestimonialsForm({
   onChange: () => void;
   saving: boolean;
 }) {
-  const subInitialHTML = data?.sub?.json
-    ? documentToHtmlString(data.sub.json)
-    : "";
-  const subtitleResponsiveInitialHTML = data?.subtitleResponsive?.json
-    ? documentToHtmlString(data.subtitleResponsive.json)
+  const textTitleInitialHTML = data?.textTitle?.json
+    ? documentToHtmlString(data.textTitle.json)
     : "";
 
   const [imagePreviews, setImagePreviews] = useState<string[]>(
@@ -131,10 +127,8 @@ export default function TestimonialsForm({
   const form = useForm({
     resolver: zodResolver(testimonialsSchema),
     defaultValues: {
-      title: data?.title || "",
-      sub: subInitialHTML,
-      subtitleResponsive: subtitleResponsiveInitialHTML,
-      finalText: data?.finalText || "",
+      entry: data?.entry || "",
+      textTitle: textTitleInitialHTML,
       testimonialImages: data?.testimonialImagesCollection?.items || [],
     },
   });
@@ -245,22 +239,12 @@ export default function TestimonialsForm({
       entryId: data?.sys?.id,
     };
 
-    if (formData.title !== data?.title) {
-      changedFields.title = formData.title;
+    if (formData.entry !== data?.entry) {
+      changedFields.entry = htmlToRichText(formData.entry);
     }
 
-    if (formData.sub !== subInitialHTML) {
-      changedFields.sub = htmlToRichText(formData.sub);
-    }
-
-    if (formData.subtitleResponsive !== subtitleResponsiveInitialHTML) {
-      changedFields.subtitleResponsive = htmlToRichText(
-        formData.subtitleResponsive
-      );
-    }
-
-    if (formData.finalText !== data?.finalText) {
-      changedFields.finalText = formData.finalText;
+    if (formData.textTitle !== textTitleInitialHTML) {
+      changedFields.textTitle = htmlToRichText(formData.textTitle);
     }
 
     if (formData.testimonialImages.some((img: any) => img.uploadId)) {
@@ -284,60 +268,29 @@ export default function TestimonialsForm({
             <div className="space-y-6">
               <FormField
                 control={form.control}
-                name="title"
+                name="entry"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title Responsive</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="textTitle"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="sub"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Subtitle</FormLabel>
-                    <FormControl>
                       <RichTextEditor
                         value={field.value}
                         onChange={field.onChange}
                       />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="subtitleResponsive"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Responsive Subtitle</FormLabel>
-                    <FormControl>
-                      <RichTextEditor
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="finalText"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Final Text</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -398,27 +351,19 @@ export default function TestimonialsForm({
             <div className="space-y-4">
               <h3 className="font-semibold">Preview</h3>
               <div className="border rounded-lg p-4 bg-[#f6f7f4]">
-                <Testimonials
-                  title={form.watch("title") || data?.title}
-                  sub={
-                    form.watch("sub")
-                      ? { json: htmlToRichText(form.watch("sub")) }
-                      : data?.sub
-                  }
-                  subtitleResponsive={
-                    form.watch("subtitleResponsive")
+                <StudentResults
+                  entry={form.watch("entry") || data?.entry}
+                  textTitle={
+                    form.watch("textTitle")
                       ? {
-                          json: htmlToRichText(
-                            form.watch("subtitleResponsive")
-                          ),
+                          json: htmlToRichText(form.watch("textTitle")),
                         }
-                      : data?.subtitleResponsive
+                      : data?.textTitle
                   }
-                  finalText={form.watch("finalText") || data?.finalText}
                   testimonialImagesCollection={{
                     items: imagePreviews.map((url) => ({ url })),
                   }}
-                  __typename="Testimonials"
+                  __typename="StudentResults"
                 />
               </div>
             </div>

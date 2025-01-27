@@ -28,9 +28,11 @@ import VideoTestimonialForm from "@/components/admin/forms/videoTestimonialForm"
 import CourseIncludesForm from "@/components/admin/forms/courseIncludesForm";
 import AboutPilarForm from "@/components/admin/forms/AboutPilarForm";
 import CallToActionForm from "@/components/admin/forms/CallToActionForm";
+import ModuleForm from "@/components/admin/forms/ModuleForm";
 
 import "react-quill/dist/quill.snow.css";
 import { Toaster } from "@/components/ui/toaster";
+import StudentResultsForm from "@/components/admin/forms/StudentResultsForm";
 
 // Define section types for type safety
 type Section = {
@@ -89,7 +91,7 @@ const sections: Section[] = [
     label: "Module",
     description: "",
     icon: "📦",
-    component: () => <div />,
+    component: ModuleForm,
   },
   {
     id: "courseIncludes",
@@ -111,6 +113,13 @@ const sections: Section[] = [
     description: "Program pricing and payment options",
     icon: "💰",
     component: PricingForm,
+  },
+  {
+    id: "studentResults",
+    label: "Student Results",
+    description: "",
+    icon: "📈",
+    component: StudentResultsForm,
   },
   {
     id: "callToAction",
@@ -141,10 +150,21 @@ export default function AdminDashboard() {
           data.pageCollection.items[0].componentsCollection.items;
 
         // Organizar los datos por tipo de componente
-        const organizedData = components.reduce((acc: any, component: any) => {
-          acc[component.__typename.toLowerCase()] = component;
-          return acc;
-        }, {});
+        const organizedData: any = {};
+
+        components.forEach((component: any) => {
+          const type = component.__typename.toLowerCase();
+          if (type === "module") {
+            // Si es un módulo, almacenamos en un array
+            if (!organizedData[type]) {
+              organizedData[type] = [];
+            }
+            organizedData[type].push(component);
+          } else {
+            // Para otros tipos, almacenamos directamente
+            organizedData[type] = component;
+          }
+        });
 
         setContentData(organizedData);
         setLoading(false);
