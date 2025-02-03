@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { SessionProvider } from "@/components/providers/SessionProvider";
 import Script from "next/script";
 
 const poppins = Poppins({
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -35,7 +33,6 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={poppins.className}>
-        {/* Google Tag Manager noscript */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-K3C8K9SL"
@@ -44,7 +41,7 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-        <SessionProvider>{children}</SessionProvider>
+        {children}
       </body>
     </html>
   );
