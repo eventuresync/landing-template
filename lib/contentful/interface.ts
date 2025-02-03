@@ -8,7 +8,7 @@ export interface RichText {
 }
 
 export interface BaseComponent {
-  __typename: string; // Permite identificar el tipo de componente
+  __typename?: string; // Permite identificar el tipo de componente
 }
 
 // Tipos específicos para los componentes de la página
