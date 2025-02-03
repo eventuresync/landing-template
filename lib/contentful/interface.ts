@@ -77,7 +77,7 @@ export interface Pricing extends BaseComponent {
       title: string;
       price: string;
       paymentType: string;
-      features: RichText;
+      features: string[];
       buttonText: string;
       buttonLink: string;
     }[];
