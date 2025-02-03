@@ -1,17 +1,16 @@
 "use client";
 
 import type { AboutPilar } from "@/lib/contentful/interface";
-import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export default function AboutPilar({ biography, image, title }: AboutPilar) {
-  const richTextOptions = {
+ /*  const richTextOptions = {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => (
         <p className="text-[#444] text-lg sm:text-base mb-4">{children}</p>
       ),
     },
-  };
+  }; */
 
   return (
     <section className="pt-20 pb-10 relative max-w-[720px] mx-auto">
@@ -29,8 +28,10 @@ export default function AboutPilar({ biography, image, title }: AboutPilar) {
               <div className="text-[1.5rem] sm:text-[2rem] leading-tight font-black mb-6 text-center">
                 {title}
               </div>
-              {documentToReactComponents(biography.json, richTextOptions)}
-              {/* <p className="text-[#444] text-lg sm:text-base mb-4">
+              {/*
+              {documentToReactComponents(biography.json)}
+              
+              <p className="text-[#444] text-lg sm:text-base mb-4">
                 ¡Hola! Soy Pilar, una ex-perfeccionista recuperada y orgullosa
                 mujer de 50+ años. Mi vida cambió por completo a los 36, cuando
                 trabajaba como ejecutiva en el mundo de la moda. Fue entonces

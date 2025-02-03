@@ -5,7 +5,15 @@ import type { Hero } from "@/lib/contentful/interface";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 
-export default function Hero() {
+export default function Hero({
+  title,
+  subtitle,
+  ctaText,
+}: {
+  title: string;
+  subtitle: string;
+  ctaText: string;
+}) {
   /* const richTextOptions = {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
@@ -25,17 +33,16 @@ export default function Hero() {
     <section className="text-center px-4 pb-12 pt-0  max-w-[960px] mx-auto">
       <div className="text-hero-mobile sm:hidden text-lg sm:text-3xl lg:text-[2.5rem]  lg:leading-tight	 font-extrabold text-[#444] mb-6">
         {/*  {mainTitle} */}
-        Sistema Digital para Karaokes:
+        {title}
       </div>
       <div className="sm:mb-6">
         <div className="text-hero-desktop hidden sm:block text-lg sm:text-3xl lg:text-[2.5rem]  lg:leading-tight	 font-extrabold text-[#444]">
-          Sistema Digital para Karaokes
+          {title}
         </div>
         {/* {documentToReactComponents(titleResponsive.json, richTextOptions)} */}
       </div>
       <p className="text-xl sm:text-xl lg:text-2xl text-[#444] max-w-3xl mx-auto">
-        Gestioná pedidos de canciones sin errores, aumentá el consumo por mesa y
-        destacate de la competencia en 3 días.
+        {subtitle}
       </p>
       <div className="grid md:grid-cols-1 mt-4 mb-12 gap-8 max-w-3xl mx-auto">
         {/* <Card className="overflow-hidden">
@@ -63,7 +70,7 @@ export default function Hero() {
         className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-xl sm:text-2xl rounded-full font-bold"
         anchorId="pricing"
       >
-        Agendá tu llamada
+        {ctaText}
       </Button>
     </section>
   );

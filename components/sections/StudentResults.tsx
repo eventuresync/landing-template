@@ -2,14 +2,13 @@
 
 import type { StudentResults } from "@/lib/contentful/interface";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
 
 export default function Testimonials2({
   testimonialImagesCollection,
   textTitle,
   entry,
 }: StudentResults) {
-  const richTextOptions = {
+ /*  const richTextOptions = {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
         return (
@@ -22,7 +21,7 @@ export default function Testimonials2({
         <span>Contenido embebido no soportado</span>
       ),
     },
-  };
+  }; */
   return (
     <section className="pb-16 pt-16 max-w-[960px] mx-auto">
       <div className="container mx-auto px-4">
@@ -30,8 +29,9 @@ export default function Testimonials2({
           {/*  <div className="hidden sm:block text-[1.5rem] sm:text-[2rem] leading-tight font-black text-center mb-2">
             Descubre cómo mujeres como tú <br />
             transformaron su vida con mi metodología ❤️
-          </div> */}
+          </div> 
           {documentToReactComponents(textTitle.json, richTextOptions)}
+          */}
           <div className="text-mujeres sm:hidden text-[1.5rem] sm:text-[2rem] leading-tight font-black text-center mb-2">
             {entry}
           </div>

@@ -3,13 +3,13 @@
 import type { Header } from "@/lib/contentful/interface";
 import Image from "next/image";
 
-export default function Header() {
+export default function Header({ img, text }: { img: string; text: string }) {
   return (
     <div className="max-w-[960px] mx-auto mb-4">
       <header className="flex flex-col items-center pt-6 pb-2">
         <div className="relative mb-4">
           <Image
-            src={"/logo-scaleappp.png"}
+            src={img}
             alt="Pilar Benitez - Perfil Instagram"
             width={192}
             height={192}

@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import type { Pricing } from "@/lib/contentful/interface";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
 
 export default function Pricing({ title, plansCollection }: Pricing) {
-  const options = {
+ /*  const options = {
     renderNode: {
       [BLOCKS.LIST_ITEM]: (node: any, children: React.ReactNode) => (
         <div className="flex items-start space-x-3">
@@ -21,7 +20,7 @@ export default function Pricing({ title, plansCollection }: Pricing) {
         <div className="space-y-4 mb-8 flex-grow">{children}</div>
       ),
     },
-  };
+  }; */
 
   return (
     <section id="pricing" className="py-16 bg-[#2a2a2a]">
@@ -73,11 +72,13 @@ export default function Pricing({ title, plansCollection }: Pricing) {
                   />
                 </div>
               ))}
-            </div> */}
+            </div> 
+            
             {documentToReactComponents(
               plansCollection.items[0].features.json,
               options
             )}
+            */}
 
             <Link target="_blank" href={plansCollection.items[0].buttonLink}>
               <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 sm:py-10 text-base sm:text-lg rounded-full mt-auto uppercase font-bold">
@@ -89,17 +90,17 @@ export default function Pricing({ title, plansCollection }: Pricing) {
           <Card className="p-4 sm:p-8 h-full flex flex-col">
             <div className="text-center mb-8 sm:mb-6 pb-2">
               <h4 className="text-2xl font-black">
-                {plansCollection.items[1].title}
+                {plansCollection.items[1]?.title}
               </h4>
               <div className="w-16 h-0.5 bg-[#FF3366] mx-auto mt-4"></div>
             </div>
 
             <div className="text-center mb-8 pb-8">
               <div className="text-3xl sm:text-4xl md:text-5xl font-black text-[#FF3366] mt-2">
-                {plansCollection.items[1].price}
+                {plansCollection.items[1]?.price}
               </div>
               <p className="text-gray-600 text-base mt-2">
-                {plansCollection.items[1].paymentType}
+                {plansCollection.items[1]?.paymentType}
               </p>
               <div className="w-full h-0.5 bg-[#FF3366] mx-auto mt-8"></div>
             </div>
@@ -125,15 +126,16 @@ export default function Pricing({ title, plansCollection }: Pricing) {
                   />
                 </div>
               ))}
-            </div> */}
+            </div> 
             {documentToReactComponents(
               plansCollection.items[1].features.json,
               options
             )}
+            */}
 
-            <Link target="_blank" href={plansCollection.items[1].buttonLink}>
+            <Link target="_blank" href={plansCollection.items[1]?.buttonLink || ""}>
               <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 sm:py-10 text-base sm:text-lg rounded-full mt-auto uppercase font-bold">
-                {plansCollection.items[1].buttonText}
+                {plansCollection.items[1]?.buttonText}
               </Button>
             </Link>
           </Card>
