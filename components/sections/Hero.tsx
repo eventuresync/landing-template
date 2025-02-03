@@ -5,14 +5,8 @@ import type { Hero } from "@/lib/contentful/interface";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 
-export default function Hero({
-  buttonText,
-  mainTitle,
-  subtitle,
-  videoId,
-  titleResponsive,
-}: Hero) {
-  const richTextOptions = {
+export default function Hero() {
+  /* const richTextOptions = {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
         return (
@@ -25,21 +19,26 @@ export default function Hero({
         <span>Contenido embebido no soportado</span>
       ),
     },
-  };
+  }; */
 
   return (
     <section className="text-center px-4 pb-12 pt-0  max-w-[960px] mx-auto">
       <div className="text-hero-mobile sm:hidden text-lg sm:text-3xl lg:text-[2.5rem]  lg:leading-tight	 font-extrabold text-[#444] mb-6">
-        {mainTitle}
+        {/*  {mainTitle} */}
+        Sistema Digital para Karaokes:
       </div>
       <div className="sm:mb-6">
-        {documentToReactComponents(titleResponsive.json, richTextOptions)}
+        <div className="text-hero-desktop hidden sm:block text-lg sm:text-3xl lg:text-[2.5rem]  lg:leading-tight	 font-extrabold text-[#444]">
+          Sistema Digital para Karaokes
+        </div>
+        {/* {documentToReactComponents(titleResponsive.json, richTextOptions)} */}
       </div>
       <p className="text-xl sm:text-xl lg:text-2xl text-[#444] max-w-3xl mx-auto">
-        {subtitle}
+        Gestioná pedidos de canciones sin errores, aumentá el consumo por mesa y
+        destacate de la competencia en 3 días.
       </p>
       <div className="grid md:grid-cols-1 mt-4 mb-12 gap-8 max-w-3xl mx-auto">
-        <Card className="overflow-hidden">
+        {/* <Card className="overflow-hidden">
           <div className="relative aspect-video">
             <iframe
               src={`https://www.youtube.com/embed/${videoId}`}
@@ -49,7 +48,7 @@ export default function Hero({
               allowFullScreen
             ></iframe>
           </div>
-        </Card>
+        </Card> */}
       </div>
       {/*  <div className="flex justify-center items-center mb-4">
         <img
@@ -64,7 +63,7 @@ export default function Hero({
         className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-xl sm:text-2xl rounded-full font-bold"
         anchorId="pricing"
       >
-        {buttonText}
+        Agendá tu llamada
       </Button>
     </section>
   );

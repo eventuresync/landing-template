@@ -3,13 +3,13 @@
 import type { Header } from "@/lib/contentful/interface";
 import Image from "next/image";
 
-export default function Header({ title, image }: Header) {
+export default function Header() {
   return (
     <div className="max-w-[960px] mx-auto mb-4">
       <header className="flex flex-col items-center pt-6 pb-2">
         <div className="relative mb-4">
           <Image
-            src={image.url}
+            src={"/logo-scaleappp.png"}
             alt="Pilar Benitez - Perfil Instagram"
             width={192}
             height={192}
@@ -17,7 +17,9 @@ export default function Header({ title, image }: Header) {
           />
         </div>
         <p className="mt-2 text-[#444] text-lg sm:text-xl text-center px-4">
-          {title}
+          Para dueños de bares y locales de karaoke en LATAM que quieren
+          eliminar el caos de pedidos manuales, evitar pérdidas de ventas y
+          mejorar la experiencia de sus clientes
         </p>
       </header>
     </div>
