@@ -2,8 +2,8 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import type { Hero } from "@/lib/contentful/interface";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import Image from "next/image";
+import foto from "@/public/image.png";
 
 export default function Hero({
   title,
@@ -44,6 +44,11 @@ export default function Hero({
       <p className="text-xl sm:text-xl lg:text-2xl text-[#444] max-w-3xl mx-auto">
         {subtitle}
       </p>
+        <Image src={foto} alt="Foto"
+                      className="mx-auto rounded-md shadow-lg my-8"
+                      width={750}
+                      height={750}
+                  />
       <div className="grid md:grid-cols-1 mt-4 mb-12 gap-8 max-w-3xl mx-auto">
         {/* <Card className="overflow-hidden">
           <div className="relative aspect-video">

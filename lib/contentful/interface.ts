@@ -66,7 +66,7 @@ export interface Module extends BaseComponent {
 export interface CourseIncludes extends BaseComponent {
   title: string;
   buttonText: string;
-  features: RichText;
+  features: string[];
   icon: string;
 }
 
@@ -96,8 +96,8 @@ export interface FAQ extends BaseComponent {
 
 export interface CallToAction extends BaseComponent {
   title: string;
-  sub: RichText;
-  buttonText: string;
+  sub?: string;
+  buttonText?: string;
 }
 
 export interface AboutPilar extends BaseComponent {

@@ -28,9 +28,7 @@ export default function ModuleHeader({
               {title}
             </h2>
 
-            <p className="text-lg md:text-xl text-gray-700 max-w-xl text-[#444] mx-auto leading-relaxed">
-              {description}
-            </p>
+            <p dangerouslySetInnerHTML={{__html:description}} className="text-lg md:text-xl text-gray-700 max-w-xl text-[#444] mx-auto leading-relaxed"/>
           </div>
         </Card>
       </div>

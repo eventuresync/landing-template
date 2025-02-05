@@ -18,8 +18,7 @@ export default function Header({ img, text }: { img: string; text: string }) {
         </div>
         <p className="mt-2 text-[#444] text-lg sm:text-xl text-center px-4">
           Para dueños de bares y locales de karaoke en LATAM que quieren
-          eliminar el caos de pedidos manuales, evitar pérdidas de ventas y
-          mejorar la experiencia de sus clientes
+          eliminar el caos
         </p>
       </header>
     </div>

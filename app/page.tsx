@@ -3,7 +3,8 @@ import Hero from "@/components/sections/Hero";
 import Pricing from "@/components/sections/Pricing";
 import Module from "@/components/sections/ModuleHeader";
 import Reality from "@/components/sections/Reality";
-import CourseContent from "@/components/sections/CourseContent";
+import CourseInclude from "@/components/sections/CourseInclude";
+import CallToAction from "@/components/sections/CallToAction";
 
 export default function Home() {
     const courseIncludesList = [
@@ -26,15 +27,16 @@ export default function Home() {
       destacate de la competencia en 3 días."
                 ctaText="Agendá tu llamada"
             />
+          
             <Module
-                icon={"🍋"}
-                title={"Jugo de limón en la herida"}
+                icon={"💰"}
+                title={"Estudios muestran..."}
                 description={
-                    "Estudios muestran que los locales con procesos manuales pierden hasta un 35% de ventas en eventos concurridos. \n ¿Cuánto dinero estás dejando de ganar por no digitalizar tu karaoke?"
+                    "Que los locales con procesos manuales pierden hasta un 35% de ventas en eventos concurridos. </br></br> ¿Cuánto dinero estás dejando de ganar por no digitalizar tu karaoke?"
                 }
             />
             <Reality
-                icon="🔥"
+                icon="🤖"
                 title={"Tecnología validada en locales de alto tráfico con:"}
                 list={courseIncludesList as string[]}
             />
@@ -71,29 +73,26 @@ export default function Home() {
                 ]}
                 title="Beneficios"
             />
-            <CourseContent
-                title="Bonos"
-                modules={[
-                    {
-                        description:
-                            "Sesión de onboarding personalizado para tu equipo.",
-                        icon: "a",
-                        title: "Bono 1",
-                    },
-                    {
-                        description:
-                            "Acceso prioritario a nuevas actualizaciones del sistema.",
-                        icon: "d",
-                        title: "Bono 2",
-                    },
-                    {
-                        description:
-                            " Soporte VIP por WhatsApp + Email por 30 días.",
-                        icon: "a",
-                        title: "Bono 3",
-                    },
-                    { description: "asd", icon: "s", title: "Bono 4" },
+            <Module
+                icon={"🚀"}
+                title={" ¿Por qué ScaleApp?"}
+                description={`Por menos del costo de un empleado por mes, resolvés el caos de pedidos y mejorás la experiencia de tus clientes.`}
+            />
+
+            <CallToAction title="Sesión de onboarding personalizado para tu equipo." />
+            <CallToAction title="Acceso prioritario a nuevas actualizaciones del sistema." />
+            <CallToAction title="Soporte VIP por WhatsApp + Email por 30 días." />
+            <CourseInclude
+                buttonText="Contactar"
+                features={[
+                    "Códigos QR personalizados para cada mesa",
+                    "Panel de control para DJ con chat integrado y alertas",
+                    "Sistema antifraude por geolocalización",
+                    "Acceso a reportes mensuales de uso",
+                    "Soporte técnico especializado",
                 ]}
+                icon="📦"
+                title="Recibirás"
             />
             <Pricing
                 title="Precios"
