@@ -45,7 +45,7 @@ export default function Hero({
         {subtitle}
       </p>
         <Image src={foto} alt="Foto"
-                      className="mx-auto rounded-md shadow-lg my-8"
+                      className="mx-auto rounded-lg shadow-lg my-8"
                       width={750}
                       height={750}
                   />

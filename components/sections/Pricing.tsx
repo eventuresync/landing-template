@@ -7,24 +7,11 @@ import Link from "next/link";
 import type { Pricing } from "@/lib/contentful/interface";
 
 export default function Pricing({ title, plansCollection }: Pricing) {
-    /*  const options = {
-    renderNode: {
-      [BLOCKS.LIST_ITEM]: (node: any, children: React.ReactNode) => (
-        <div className="flex items-start space-x-3">
-          <Check className="w-5 h-5 text-[#FF3366] mt-1 flex-shrink-0" />
-          <span className="text-lg sm:text-base">{children}</span>
-        </div>
-      ),
-      [BLOCKS.UL_LIST]: (node: any, children: React.ReactNode) => (
-        <div className="space-y-4 mb-8 flex-grow">{children}</div>
-      ),
-    },
-  }; */
 
     return (
-        <section id="pricing" className="py-16 bg-[#2a2a2a]">
+        <section id="pricing" className="py-16  bg-black/50  ">
             <div className="container mx-auto px-4 max-w-[960px]">
-                <p className="text-xl sm:text-2xl text-center text-white font-black mb-12 max-w-2xl mx-auto">
+                <p className="text-xl sm:text-2xl text-center text-white font-black mb-12 max-w-2xl mx-auto ">
                     <span className="underline underline-offset-4 decoration-white text-4xl">
                         {title}
                     </span>

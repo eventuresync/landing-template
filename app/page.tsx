@@ -15,6 +15,8 @@ export default function Home() {
     ];
     return (
         <main className="min-h-screen bg-gradient-to-br from-indigo-950 via-blue-600 to-indigo-950 pb-8">
+          <div className="bg-black/70">
+
             <Header
                 img="/logo-scaleappp.png"
                 text="Para dueños de bares y locales de karaoke en LATAM que quieren
@@ -94,6 +96,7 @@ export default function Home() {
                 icon="📦"
                 title="Recibirás"
             />
+
             <Pricing
                 title="Precios"
                 plansCollection={{
@@ -129,6 +132,8 @@ export default function Home() {
                     ],
                 }}
             />
+          </div>
+
         </main>
     );
 }
