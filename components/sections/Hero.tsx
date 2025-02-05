@@ -36,12 +36,12 @@ export default function Hero({
         {title}
       </div>
       <div className="sm:mb-6">
-        <div className="text-hero-desktop hidden sm:block text-lg sm:text-3xl lg:text-[2.5rem]  lg:leading-tight	 font-extrabold text-[#444]">
+        <div className="text-hero-desktop hidden sm:block text-lg sm:text-3xl lg:text-[2.5rem]  lg:leading-tight	 font-extrabold text-white">
           {title}
         </div>
         {/* {documentToReactComponents(titleResponsive.json, richTextOptions)} */}
       </div>
-      <p className="text-xl sm:text-xl lg:text-2xl text-[#444] max-w-3xl mx-auto">
+      <p className="text-xl sm:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
         {subtitle}
       </p>
         <Image src={foto} alt="Foto"

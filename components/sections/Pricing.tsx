@@ -25,7 +25,7 @@ export default function Pricing({ title, plansCollection }: Pricing) {
         <section id="pricing" className="py-16 bg-[#2a2a2a]">
             <div className="container mx-auto px-4 max-w-[960px]">
                 <p className="text-xl sm:text-2xl text-center text-white font-black mb-12 max-w-2xl mx-auto">
-                    <span className="underline underline-offset-4 decoration-pink-500">
+                    <span className="underline underline-offset-4 decoration-white text-4xl">
                         {title}
                     </span>
                 </p>
