@@ -8,7 +8,7 @@ import CallToAction from "@/components/sections/CallToAction";
 
 export default function Home() {
     const courseIncludesList = [
-        '<span style="color: white">Control de acceso</span>, por Wi-Fi/geolocalización para evitar pedidos falsos.',
+        '<span style="color: white">Control de acceso</span>, por Wi-Fi/Geolocalización para evitar pedidos falsos.',
         '<span style="color: white">Sistema de cola automática</span> que redujo errores en un 90% durante pruebas internas.',
         '<span style="color: white">Casos reales:</span> Bares que lograron reducir el tiempo de gestión de pedidos en un 70%',
         ,
