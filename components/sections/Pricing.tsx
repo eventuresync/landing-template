@@ -28,7 +28,7 @@ export default function Pricing({ title, plansCollection }: Pricing) {
                             </div>
 
                             <div className="text-center mb-8  pb-8">
-                                <div className="text-3xl sm:text-4xl md:text-5xl font-black text-[#FF3366] mt-2">
+                                <div className="text-3xl sm:text-4xl md:text-5xl font-light text-[#FF3366] mt-2 ">
                                     {plan.price}
                                 </div>
                                 <p className="text-gray-600 text-base mt-2">

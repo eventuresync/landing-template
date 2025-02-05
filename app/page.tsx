@@ -111,8 +111,8 @@ export default function Home() {
                                 "Control de acceso por geolocalización",
                                 "Soporte técnico básico",
                             ],
-                            paymentType: "+100 usd/mes ",
-                            price: "250$ desarrollo",
+                            paymentType: "$100 usd/mes mantenimiento ",
+                            price: "$250 USD único pago",
                         },
                         {
                             buttonLink: "/",
@@ -126,7 +126,7 @@ export default function Home() {
                                 "¿Tenés una idea? La hacemos realidad",
                             ],
                             paymentType:
-                                "+100 usd/mes (puede variar por personalización)",
+                                "$100 usd/mes + adicional según requisitos",
                             price: "Cotización personalizada",
                         },
                     ],
