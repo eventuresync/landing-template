@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { Button } from "../ui/button";
 import type { CourseIncludes } from "@/lib/contentful/interface";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export default function CourseIncludes({
     buttonText,
@@ -12,31 +11,11 @@ export default function CourseIncludes({
     title,
     icon,
 }: CourseIncludes) {
-    /* const options = {
-    renderNode: {
-      [BLOCKS.LIST_ITEM]: (node: any, children: React.ReactNode) => (
-        <li className="flex flex-start gap-3">
-          <Check
-            style={{
-              minWidth: "24px",
-              minHeight: "24px",
-            }}
-            className="mt-1 text-[#FF3366]"
-          />
-          <div className="text-lg text-[#4A4A4A]">{children}</div>
-        </li>
-      ),
-      [BLOCKS.UL_LIST]: (node: any, children: React.ReactNode) => (
-        <ul className="space-y-4">{children}</ul>
-      ),
-    },
-  };
- */
     return (
         <section className="py-10 max-w-[960px] mx-auto">
             <div className="container mx-auto px-4">
                 <div className="flex justify-center items-center max-w-3xl mx-auto">
-                    <Card className="rounded-[2rem] p-8 px-[30px] lg:px-[80px] relative">
+                    <Card className="rounded-[2rem] p-8 px-[30px] lg:px-[80px] relative bg-gradient-to-bl from-yellow-300 via-yellow-200 to-yellow-800  bg-opacity-30 backdrop-blur-lg shadow-lg border-2 border-black">
                         <div className="flex flex-col items-center gap-3 mb-6">
                             <div className="absolute text-8xl -top-12 left-1/2 transform -translate-x-1/2">
                                 {icon}
@@ -54,7 +33,7 @@ export default function CourseIncludes({
                                             minWidth: "24px",
                                             minHeight: "24px",
                                         }}
-                                        className="mt-1 text-[#FF3366]"
+                                        className="mt-1 text-green-500 bg-black/90 p-1 backdrop-blur-lg rounded-md"
                                     />
                                     {feature}
                                 </div>

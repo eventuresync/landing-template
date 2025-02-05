@@ -79,9 +79,9 @@ export default function Home() {
                 description={`Por menos del costo de un empleado por mes, resolvés el caos de pedidos y mejorás la experiencia de tus clientes.`}
             />
 
-            <CallToAction title="Sesión de onboarding personalizado para tu equipo." />
-            <CallToAction title="Acceso prioritario a nuevas actualizaciones del sistema." />
-            <CallToAction title="Soporte VIP por WhatsApp + Email por 30 días." />
+            <CallToAction title="Sesión de onboarding personalizado para tu equipo" />
+            <CallToAction title="Acceso prioritario a nuevas actualizaciones del sistema" />
+            <CallToAction title="Soporte VIP por WhatsApp + Email por 30 días" />
             <CourseInclude
                 buttonText="Contactar"
                 features={[
