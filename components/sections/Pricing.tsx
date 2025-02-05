@@ -7,11 +7,10 @@ import Link from "next/link";
 import type { Pricing } from "@/lib/contentful/interface";
 
 export default function Pricing({ title, plansCollection }: Pricing) {
-
     return (
         <section id="pricing" className="py-16  bg-black/50  ">
             <div className="container mx-auto px-4 max-w-[960px]">
-                <p className="text-xl sm:text-2xl text-center text-white font-black mb-12 max-w-2xl mx-auto ">
+                <p className="text-xl sm:text-2xl text-center text-white font-light mb-12 max-w-2xl mx-auto ">
                     <span className="underline underline-offset-4 decoration-white text-4xl">
                         {title}
                     </span>
@@ -28,9 +27,12 @@ export default function Pricing({ title, plansCollection }: Pricing) {
                             </div>
 
                             <div className="text-center mb-8  pb-8">
-                                <div className="text-3xl sm:text-4xl md:text-5xl font-light text-[#FF3366] mt-2 ">
-                                    {plan.price}
-                                </div>
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: plan.price,
+                                    }}
+                                    className="text-3xl sm:text-4xl md:text-5xl font-normal text-[#FF3366] mt-2 "
+                                />
                                 <p className="text-gray-600 text-base mt-2">
                                     {" "}
                                     {plan.paymentType}

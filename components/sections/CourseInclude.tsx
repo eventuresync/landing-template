@@ -42,15 +42,15 @@ export default function CourseIncludes({
                     </Card>
                 </div>
                 <div className="pt-12 flex justify-center items-center">
-                    <Button
-                        size="xl"
-                        className="relative overflow-hidden text-white text-2xl rounded-full font-bold bg-black transition-colors duration-200 
-                        before:absolute before:inset-0 before:bg-gradient-to-tr before:from-pink-800 before:via-pink-600 before:to-pink-800 
-                        before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-200"
-                        anchorId="pricing"
-                    >
-                        {buttonText}
-                    </Button>
+                    <div>
+                        <Button
+                            size="xl"
+                            className=""
+                            anchorId="pricing"
+                        >
+                            <span className="relative z-20">{buttonText}</span>
+                        </Button>
+                    </div>
                 </div>
             </div>
         </section>

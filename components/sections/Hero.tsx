@@ -45,9 +45,9 @@ export default function Hero({
         {subtitle}
       </p>
         <Image src={foto} alt="Foto"
-                      className="mx-auto rounded-lg shadow-lg my-8"
-                      width={750}
-                      height={750}
+                      className="mx-auto rounded-xl shadow-lg my-8"
+                      width={800}
+                      height={800}
                   />
       <div className="grid md:grid-cols-1 mt-4 mb-12 gap-8 max-w-3xl mx-auto">
         {/* <Card className="overflow-hidden">
@@ -75,7 +75,8 @@ export default function Hero({
         className="bg-[#FF3366] hover:bg-[#FF1F59] text-white text-xl sm:text-2xl rounded-full font-bold"
         anchorId="pricing"
       >
-        {ctaText}
+                                    <span className="relative z-20">{ctaText}</span>
+
       </Button>
     </section>
   );
