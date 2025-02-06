@@ -10,8 +10,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Pilar Benitez | Programa Autocuidarte",
-  description: "Autocuidarte, Sin dietas ultra-rígidas",
+  title: "ScaleAppp",
+  description: "Soluciones web para locales de entretenimiento",
 };
 
 export default function RootLayout({

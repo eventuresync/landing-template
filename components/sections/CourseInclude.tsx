@@ -12,9 +12,9 @@ export default function CourseIncludes({
     icon,
 }: CourseIncludes) {
     return (
-        <section className="py-10 max-w-[960px] mx-auto">
+        <section className="py-20 max-w-[960px] w-full mx-auto">
             <div className="container mx-auto px-4">
-                <div className="flex justify-center items-center max-w-3xl mx-auto">
+                <div className="w-full max-w-3xl mx-auto">
                     <Card className="rounded-[2rem] p-8 px-[30px] lg:px-[80px] relative bg-gradient-to-bl from-[#d47f49] via-[#f87e32] to-[#ff914d]  bg-opacity-30 backdrop-blur-lg shadow-lg border-2 border-black">
                         <div className="flex flex-col items-center gap-3 mb-6">
                             <div className="absolute text-8xl -top-12 left-1/2 transform -translate-x-1/2">
@@ -25,7 +25,7 @@ export default function CourseIncludes({
                             </div>
                         </div>
 
-                        <div>
+                        <div className="flex flex-col gap-3 text-white text-lg w-full">
                             {features.map((feature, i) => (
                                 <div key={i} className="flex flex-start gap-3">
                                     <Check

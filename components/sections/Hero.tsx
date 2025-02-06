@@ -49,8 +49,8 @@ export default function Hero({
                       width={800}
                       height={800}
                   />
-      <div className="grid md:grid-cols-1 mt-4 mb-12 gap-8 max-w-3xl mx-auto">
-        {/* <Card className="overflow-hidden">
+       {/* <div className="grid md:grid-cols-1 mt-4 mb-12 gap-8 max-w-3xl mx-auto">
+       <Card className="overflow-hidden">
           <div className="relative aspect-video">
             <iframe
               src={`https://www.youtube.com/embed/${videoId}`}
@@ -60,8 +60,8 @@ export default function Hero({
               allowFullScreen
             ></iframe>
           </div>
-        </Card> */}
-      </div>
+        </Card> 
+      </div>*/}
       {/*  <div className="flex justify-center items-center mb-4">
         <img
           src="/pilar-hero.png"

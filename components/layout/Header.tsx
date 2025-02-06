@@ -13,7 +13,7 @@ export default function Header({ img, text }: { img: string; text: string }) {
             alt="logo"
             width={192}
             height={192}
-            className="w-48"
+            className="w-28"
           />
         </div>
         <p className="mt-2 text-gray-200 font-thin text-lg sm:text-xl text-center px-4">

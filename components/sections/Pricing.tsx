@@ -11,11 +11,11 @@ export default function Pricing({ title, plansCollection }: Pricing) {
         <section id="pricing" className="py-16  bg-black/50  ">
             <div className="container mx-auto px-4 max-w-[960px]">
                 <p className="text-xl sm:text-2xl text-center text-white font-light mb-12 max-w-2xl mx-auto ">
-                    <span className="underline underline-offset-4 decoration-white text-4xl">
+                    <span className=" text-5xl font-semibold">
                         {title}
                     </span>
                 </p>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-14">
                     {plansCollection.items.map((plan, i) => (
                         // eslint-disable-next-line react/jsx-key
                         <Card className="p-4 sm:p-8 h-full flex flex-col">
@@ -67,7 +67,7 @@ export default function Pricing({ title, plansCollection }: Pricing) {
 
                             <Link target="_blank" href={plan.buttonLink}>
                                 <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 sm:py-10 text-base sm:text-lg rounded-full mt-auto uppercase font-bold">
-                                    {plan.buttonText}
+                                <span className="relative z-20">{plan.buttonText}</span>
                                 </Button>
                             </Link>
                         </Card>

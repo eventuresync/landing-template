@@ -121,7 +121,7 @@ export default function Home() {
                 </FadeIn>
                 <FadeIn>
                 <Pricing
-                    title="Precios"
+                    title="SERVICIOS"
                     plansCollection={{
                         items: [
                             {
@@ -143,9 +143,8 @@ export default function Home() {
                                 buttonText: "Solicitar Cotización",
                                 features: [
                                     "Para negocios que buscan funcionalidades exclusivas",
-                                    "Integración con tu sistema de reservas o cobros",
                                     "Diseño de interfaz con tu marca",
-                                    "Alertas personalizadas para el equipo",
+                                    "Capacitación para tu equipo",
                                     "¿Tenés una idea? La hacemos realidad",
                                 ],
                                 paymentType:
@@ -156,6 +155,8 @@ export default function Home() {
                     }}
                 />
                 </FadeIn>
+                <CallToAction title="¿Listo para mejorar la experiencia de tus clientes?" buttonText="Contactar" />
+
             </div>
         </main>
     );
