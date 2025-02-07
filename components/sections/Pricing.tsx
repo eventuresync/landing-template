@@ -66,7 +66,7 @@ export default function Pricing({ title, plansCollection }: Pricing) {
                             }
 
                             <Link target="_blank" href={plan.buttonLink}>
-                                <Button className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 sm:py-10 text-base sm:text-lg rounded-full mt-auto uppercase font-bold">
+                                <Button link="https://calendar.app.google/93ZDTSHekqWEQdmUA" className="w-full bg-[#FF3366] hover:bg-[#FF1F59] text-white py-6 sm:py-10 text-base sm:text-lg rounded-full mt-auto uppercase font-bold">
                                 <span className="relative z-20">{plan.buttonText}</span>
                                 </Button>
                             </Link>

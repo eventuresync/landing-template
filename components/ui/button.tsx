@@ -45,17 +45,18 @@ export interface ButtonProps
         VariantProps<typeof buttonVariants> {
     asChild?: boolean;
     anchorId?: string;
+    link?: string;
 }
 
 const Button = React.forwardRef<
     HTMLButtonElement | HTMLAnchorElement,
     ButtonProps
->(({ className, variant, size, asChild = false, anchorId, ...props }, ref) => {
+>(({ className, variant, size, asChild = false, anchorId, link , ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
 
-    if (anchorId) {
+    if (anchorId || link) {
         return (
-            <Link href={`#${anchorId}`}>
+            <Link target={link ? "_blank" : "_self"} href={link || `#${anchorId}`}>
                 <Comp
                     className={cn(buttonVariants({ variant, size, className }))}
                     ref={ref as React.ForwardedRef<HTMLButtonElement>}
