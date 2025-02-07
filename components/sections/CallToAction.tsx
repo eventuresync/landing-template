@@ -26,7 +26,7 @@ export default function CallToAction({ title, buttonText, sub }: CallToAction) {
                         {title}
                     </div>
                     {sub}
-                    <Button size="xl" className="" anchorId="pricing">
+                    <Button size="xl"  anchorId="pricing" variant={"secondary"}>
                         <span className="relative z-20">{buttonText}</span>
                     </Button>
                 </div>
