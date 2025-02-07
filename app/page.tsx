@@ -15,7 +15,7 @@ export default function Home() {
         ,
     ];
     return (
-        <main className="min-h-screen bg-gradient-to-br from-indigo-950 via-blue-600 to-indigo-950 pb-8">
+        <main className="min-h-screen bg-gradient-to-br from-indigo-950 via-blue-600 to-indigo-950">
             <div className="bg-black/70">
                 <Header
                     img="/logo-scaleappp.png"
@@ -105,59 +105,68 @@ export default function Home() {
                     <CallToAction title="Soporte VIP por WhatsApp + Email por 30 días" />
                 </FadeIn>
                 <FadeIn>
-
-                <CourseInclude
-                    buttonText="Contactar"
-                    features={[
-                        "Códigos QR personalizados para cada mesa",
-                        "Panel de control para DJ con chat integrado y alertas",
-                        "Sistema antifraude por geolocalización",
-                        "Acceso a reportes mensuales de uso",
-                        "Soporte técnico especializado",
-                    ]}
-                    icon="📦"
-                    title="Recibirás"
-                />
+                    <CourseInclude
+                        buttonText="Contactar"
+                        features={[
+                            "Códigos QR personalizados para cada mesa",
+                            "Panel de control para DJ con chat integrado y alertas",
+                            "Sistema antifraude por geolocalización",
+                            "Acceso a reportes mensuales de uso",
+                            "Soporte técnico especializado",
+                        ]}
+                        icon="📦"
+                        title="Recibirás"
+                    />
                 </FadeIn>
+                <div className="bg-black ">
+
                 <FadeIn>
-                <Pricing
-                    title="SERVICIOS"
-                    plansCollection={{
-                        items: [
-                            {
-                                buttonLink: "/",
-                                title: "Sistema standard",
-                                buttonText: "Ordenar",
-                                features: [
-                                    "Ideal para locales que quieren una solución lista en 72 horas",
-                                    "Códigos QR + Panel de control para DJ.",
-                                    "Control de acceso por geolocalización",
-                                    "Soporte técnico básico",
-                                ],
-                                paymentType: "$100 usd/mes mantenimiento ",
-                                price: "$250 USD </br> desarrollo",
-                            },
-                            {
-                                buttonLink: "/",
-                                title: "Sistema personalizado",
-                                buttonText: "Solicitar Cotización",
-                                features: [
-                                    "Para negocios que buscan funcionalidades exclusivas",
-                                    "Diseño de interfaz con tu marca",
-                                    "Capacitación para tu equipo",
-                                    "¿Tenés una idea? La hacemos realidad",
-                                ],
-                                paymentType:
-                                    "$100 usd/mes + adicional según requisitos",
-                                price: "Cotización personalizada",
-                            },
-                        ],
-                    }}
-                />
+                    <Pricing
+                        title="SERVICIOS"
+                        plansCollection={{
+                            items: [
+                                {
+                                    buttonLink: "/",
+                                    title: "Sistema standard",
+                                    buttonText: "Ordenar",
+                                    features: [
+                                        "Ideal para locales que quieren una solución lista en 72 horas",
+                                        "Códigos QR + Panel de control para DJ.",
+                                        "Control de acceso por geolocalización",
+                                        "Soporte técnico básico",
+                                    ],
+                                    paymentType: "$100 usd/mes mantenimiento ",
+                                    price: "$250 USD </br> desarrollo",
+                                },
+                                {
+                                    buttonLink: "/",
+                                    title: "Sistema personalizado",
+                                    buttonText: "Solicitar Cotización",
+                                    features: [
+                                        "Para negocios que buscan funcionalidades exclusivas",
+                                        "Diseño de interfaz con tu marca",
+                                        "Capacitación para tu equipo",
+                                        "¿Tenés una idea? La hacemos realidad",
+                                    ],
+                                    paymentType:
+                                        "$100 usd/mes + adicional según requisitos",
+                                    price: "Cotización personalizada",
+                                },
+                            ],
+                        }}
+                    />
                 </FadeIn>
-                <CallToAction title="¿Listo para mejorar la experiencia de tus clientes?" buttonText="Contactar" />
 
+                <FadeIn>
+                    <CallToAction
+
+                        title="¿Listo para mejorar la experiencia de tus clientes?"
+                        buttonText="Contactar"
+                    />
+                </FadeIn>
             </div>
+            </div>
+
         </main>
     );
 }

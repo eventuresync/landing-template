@@ -15,12 +15,12 @@ export default function CourseIncludes({
         <section className="py-20 max-w-[960px] w-full mx-auto">
             <div className="container mx-auto px-4">
                 <div className="w-full max-w-3xl mx-auto">
-                    <Card className="rounded-[2rem] p-8 px-[30px] lg:px-[80px] relative bg-gradient-to-bl from-[#d47f49] via-[#f87e32] to-[#ff914d]  bg-opacity-30 backdrop-blur-lg shadow-lg border-2 border-black">
+                    <Card className="rounded-[2rem] p-8 px-[30px] lg:px-[80px] relative bg-gradient-to-bl from-[#6b6060e1] via-[#5a595800] to-[#1d191918]  bg-opacity-30 backdrop-blur-lg shadow-lg border-2 border-black">
                         <div className="flex flex-col items-center gap-3 mb-6">
                             <div className="absolute text-8xl -top-12 left-1/2 transform -translate-x-1/2">
                                 {icon}
                             </div>
-                            <div className="mt-10 text-3xl lg:text-5xl text-black text-center font-bold">
+                            <div className="mt-10 text-3xl lg:text-5xl text-white text-center font-bold">
                                 {title}
                             </div>
                         </div>
