@@ -2,7 +2,6 @@
 
 import type { Testimonials } from "@/lib/contentful/interface";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 
 export default function Testimonials({
   finalText,
@@ -11,35 +10,6 @@ export default function Testimonials({
   sub,
   testimonialImagesCollection,
 }: Testimonials) {
-  const richTextOptions = {
-    renderMark: {
-      [MARKS.UNDERLINE]: (text: React.ReactNode) => (
-        <span className="underline underline-offset-4">{text}</span>
-      ),
-    },
-    renderNode: {
-      [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => (
-        <p className="hidden sm:block font-black text-testimonial text-[1.5rem] sm:text-[2rem] leading-tight text-[#444] text-center">
-          {children}
-        </p>
-      ),
-    },
-  };
-
-  const richTextOptionsMobile = {
-    renderMark: {
-      [MARKS.UNDERLINE]: (text: React.ReactNode) => (
-        <span className="underline underline-offset-4">{text}</span>
-      ),
-    },
-    renderNode: {
-      [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => (
-        <p className="sm:hidden font-black text-testimonial text-[1.5rem] sm:text-[2rem] leading-tight text-[#444] text-center">
-          {children}
-        </p>
-      ),
-    },
-  };
 
   return (
     <section className="pb-16 pt-8 max-w-[960px] mx-auto">
@@ -49,11 +19,7 @@ export default function Testimonials({
             {title}
           </div>
           <div className="mb-2">
-            {documentToReactComponents(sub.json, richTextOptions)}
-            {documentToReactComponents(
-              subtitleResponsive.json,
-              richTextOptionsMobile
-            )}
+
           </div>
 
           <p className="text-xl sm:text-[2rem] sm:text-[1.5rem] leading-tight text-[#444] pt-8 text-center max-w-2xl mx-auto">

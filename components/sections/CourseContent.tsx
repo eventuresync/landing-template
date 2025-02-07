@@ -24,7 +24,7 @@ export default function CourseContent(props: {
                             key={i}
                             className="p-8 hover:shadow-lg transition-shadow"
                         >
-                            <module.icon className="w-12 h-12 text-[#FF3366] mb-4" />
+                            <module.icon  />
                             <h3 className="text-xl font-bold mb-3">
                                 {module.title}
                             </h3>

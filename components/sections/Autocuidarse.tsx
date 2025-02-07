@@ -2,7 +2,6 @@
 
 import type { Program } from "@/lib/contentful/interface";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
 
 export default function Autocuidarse({
   desc,
@@ -11,35 +10,6 @@ export default function Autocuidarse({
   welcomeText,
   descMobile,
 }: Program) {
-  const richTextOptions = {
-    renderNode: {
-      [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
-        return (
-          <p className="hidden sm:block tracking-wider text-xl text-center text-gray-600 max-w-2xl mx-auto">
-            {children}
-          </p>
-        );
-      },
-      [BLOCKS.EMBEDDED_ENTRY]: (node: any) => (
-        <span>Contenido embebido no soportado</span>
-      ),
-    },
-  };
-
-  const richTextOptionsMobile = {
-    renderNode: {
-      [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
-        return (
-          <p className="sm:hidden text-25anios tracking-wider text-xl text-center text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {children}
-          </p>
-        );
-      },
-      [BLOCKS.EMBEDDED_ENTRY]: (node: any) => (
-        <span>Contenido embebido no soportado</span>
-      ),
-    },
-  };
 
   return (
     <section className="pb-8 pt-12 max-w-[960px] mx-auto">
@@ -58,8 +28,7 @@ export default function Autocuidarse({
           </div>
         </div>
         <div className="py-4 mt-4">
-          {documentToReactComponents(desc.json, richTextOptions)}
-          {documentToReactComponents(descMobile.json, richTextOptionsMobile)}
+
         </div>
       </div>
     </section>
