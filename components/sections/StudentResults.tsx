@@ -1,7 +1,6 @@
 "use client";
 
 import type { StudentResults } from "@/lib/contentful/interface";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export default function Testimonials2({
   testimonialImagesCollection,

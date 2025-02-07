@@ -1,7 +1,6 @@
 "use client";
 
 import type { Testimonials } from "@/lib/contentful/interface";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export default function Testimonials({
   finalText,

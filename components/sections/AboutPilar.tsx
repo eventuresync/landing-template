@@ -1,7 +1,6 @@
 "use client";
 
 import type { AboutPilar } from "@/lib/contentful/interface";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export default function AboutPilar({ biography, image, title }: AboutPilar) {
  /*  const richTextOptions = {
